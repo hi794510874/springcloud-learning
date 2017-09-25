@@ -1,0 +1,22 @@
+server:
+  port: 8001
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://172.18.21.106/WingOnTravels/ConfigServer.git # 配置gitlab仓库的地址，注意，此处必须以.git结尾
+#          search-paths: /ConfigServer          # gitlab仓库地址下的相对地址，可以配置多个，用,分割。  测试的时候文件在根目录下
+          username: huang_b                                              # gitlab仓库的账号
+          password: Tyughjbnm123                                         # gitlab仓库的密码
+          basedir: /gitconfigserver                                        # 这个是 git 目录  linux默认定期会去清理temp文件夹
+#          clone-on-start: true                                           # 启动的时候去clone  发现有超时的问题
+  rabbitmq:
+        host: 172.18.21.116
+        port: 5672
+        username: admin
+        password: admin
+management:
+  security:
+    enabled: false

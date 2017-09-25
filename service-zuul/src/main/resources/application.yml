@@ -1,0 +1,26 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+      prefer-ip-address: true
+      ip-address: ${spring.cloud.client.ipAddress}
+server:
+  port: 8769
+spring:
+  application:
+    name: service-zuul
+  zipkin:
+    base-url: http://localhost:9411
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: service-ribbon
+    api-b:
+      path: /api-b/**
+      serviceId: service-feign
+management:
+  security:
+#  设为false后/health能拿到更多信息
+    enabled: false
