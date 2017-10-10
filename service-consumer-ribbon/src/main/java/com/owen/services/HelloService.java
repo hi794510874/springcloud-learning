@@ -1,6 +1,7 @@
 package com.owen.services;
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.owen.model.CommonRQ;
 import com.owen.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class HelloService {
     @Autowired
     RestTemplate restTemplate;
 
-
+    @HystrixCommand(fallbackMethod = "getPersonFaile")
     public String getPerson(String name) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
@@ -30,6 +31,11 @@ public class HelloService {
             return e.getMessage();
         }
     }
+
+    public String getPersonFaile(String name) {
+        return "get person faile";
+    }
+
 
     public String savePerson(Person person) {
         HttpHeaders requestHeaders = new HttpHeaders();

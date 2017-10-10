@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by huang_b on 2017/9/25.
  */
 @RestController
-@RequestMapping("hello")
+@RequestMapping("/hello")
 public class HelloController {
     @Autowired
     HelloService helloService;
