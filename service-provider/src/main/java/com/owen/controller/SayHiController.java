@@ -30,7 +30,8 @@ public class SayHiController {
     }
 
     @RequestMapping(value = "/getperson")
-    public CommonRS<Person> getperson(@RequestParam String name) {
+    public CommonRS<Person> getperson(@RequestParam String name) throws InterruptedException {
+        Thread.sleep(5000);
         Person person = new Person();
         person.setAge(22);
         person.setName(name + " from port:" + port);

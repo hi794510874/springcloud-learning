@@ -25,3 +25,4 @@ management:
   security:
 #  设为false后/health能拿到更多信息
     enabled: false
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 7000
