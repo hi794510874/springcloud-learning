@@ -17,7 +17,7 @@ public class SayHiController {
     @Value("${server.port}")
     String port;
 
-    @RequestMapping("/hi")
+    @RequestMapping(value = "/hi",method = RequestMethod.GET)
     public CommonRS<String> home(@RequestParam String name) {
         String str = "hi " + name + ",i am from port:" + port;
         CommonRS<String> rs = new CommonRS<>();
@@ -29,7 +29,7 @@ public class SayHiController {
         return rs;
     }
 
-    @RequestMapping(value = "/getperson")
+    @RequestMapping(value = "/getperson",method = RequestMethod.GET)
     public CommonRS<Person> getperson(@RequestParam String name) throws InterruptedException {
         Thread.sleep(5000);
         Person person = new Person();

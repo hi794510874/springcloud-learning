@@ -25,4 +25,4 @@ management:
   security:
 #  设为false后/health能拿到更多信息
     enabled: false
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 7000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 7000  # 执行超过7s hystrix command 起作用  如果直接让被调用的服务停掉 又没起作用

@@ -1,16 +1,16 @@
 package com.owen.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by huang_b on 2017/9/25.
- */
-@RequestMapping("blog")
+ *//*
+@RequestMapping("blog")*/
+@RestController
 public class BlogController {
-    @GetMapping("getblogbyid")
-    public String getBlogById(@PathVariable int id) {
-        return "";
+    /*@GetMapping(value = "getblogbyid")*/
+    @RequestMapping(value = "getblogbyid",method = RequestMethod.GET)
+    public String getBlogById(@RequestParam int id) {
+        return "等待集成 mybatis";
     }
 }
