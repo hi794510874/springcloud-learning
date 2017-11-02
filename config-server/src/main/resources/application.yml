@@ -20,6 +20,7 @@ spring:
         password: admin
   application:
     name: config-server
+    index: ${random.int}  # 避免同一个服务部署多个实例 刷新配置的时候 不会刷新的情况
 management:
   security:
     enabled: false
