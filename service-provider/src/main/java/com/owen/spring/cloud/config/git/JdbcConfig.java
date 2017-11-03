@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @RefreshScope
 public class JdbcConfig {
     @Value("${spring-datasource-url}")
-    private   String springDataSourceUrl;
+    private String springDataSourceUrl;
 
-    public   String getSpringDataSourceUrl() {
+    public String getSpringDataSourceUrl() {
         return springDataSourceUrl;
     }
 }

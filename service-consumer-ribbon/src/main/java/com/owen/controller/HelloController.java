@@ -4,6 +4,7 @@ import com.owen.model.Person;
 import com.owen.services.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -18,13 +19,13 @@ public class HelloController {
     HelloService helloService;
 
 
-    @RequestMapping(value = "/getperson")
+    @RequestMapping(value = "/getperson",method = RequestMethod.GET)
     public String getPerson() {
         String str = helloService.getPerson("Bob");
         return str;
     }
 
-    @RequestMapping(value = "/saveperson")
+    @RequestMapping(value = "/saveperson",method = RequestMethod.POST)
     public String savePerson() {
         Person person = new Person();
         person.setAge(22);
