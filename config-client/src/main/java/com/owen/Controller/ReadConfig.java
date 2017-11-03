@@ -14,17 +14,23 @@ public class ReadConfig {
     @Value("${packagefh-online-url}")
     private String userName;
     @Value("${redis-address}")
-    private  String redisAddress;
-
-
+    private String redisAddress;
+    @Value("${spring-datasource-url}")
+    private String springDataSourceUrl;
 
     @RequestMapping("/getconfig")
     public String getConfig() {
 
         return userName;
     }
+
     @RequestMapping("/hello")
-    public  String hello(){
-        return  redisAddress;
+    public String hello() {
+        return redisAddress;
+    }
+
+    @RequestMapping("/getJdbcUrl")
+    public  String getJdbcUrl(){
+        return  springDataSourceUrl;
     }
 }

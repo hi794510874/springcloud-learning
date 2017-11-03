@@ -13,22 +13,15 @@ eureka:
 server:
   port: 8763
 spring:
-  application:
-    name: service-provider
   zipkin:
     base-url: http://localhost:9411
     #让 zipkin收集数据更及时
   sleuth:
       sampler:
         percentage: 1
-  rabbitmq:
-          host: 172.18.21.116
-          port: 5672
-          username: admin
-          password: admin
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
+#    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
     username: sa
     password: ctripwingonuat
 management:
