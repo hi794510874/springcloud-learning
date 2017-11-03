@@ -26,7 +26,22 @@ spring:
           port: 5672
           username: admin
           password: admin
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
+    username: sa
+    password: ctripwingonuat
 management:
   security:
 #  设为false后/health能拿到更多信息
     enabled: false
+logging.level.com.owen.mapper: DEBUG
+mybatis.type-aliases-package: com.owen.model
+
+
+
+
+
+
+
+
