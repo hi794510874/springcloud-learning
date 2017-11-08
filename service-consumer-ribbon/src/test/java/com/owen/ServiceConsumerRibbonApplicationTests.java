@@ -11,6 +11,6 @@ public class ServiceConsumerRibbonApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println("ok");
+
     }
 }
