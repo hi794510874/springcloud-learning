@@ -24,8 +24,8 @@ public class RestTempLateUtil<T> {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         //todo 这里参数和url还要进一步 封装  可以参考.Net现有的 url 生成变量直接调用
-        ResponseEntity<String> result = restTemplate.exchange("http://service-provider/getblogbyid/{id}", HttpMethod.GET, entity, String.class, args);
-//        ResponseEntity<String> result = restTemplate.exchange("http://service-provider/getAllBlog", HttpMethod.GET, entity, String.class, args);
+//        ResponseEntity<String> result = restTemplate.exchange("http://service-provider/getblogbyid/{id}", HttpMethod.GET, entity, String.class, args);
+        ResponseEntity<String> result = restTemplate.exchange("http://service-provider/getAllBlog", HttpMethod.GET, entity, String.class, args);
 
         String response = result.getBody();
 

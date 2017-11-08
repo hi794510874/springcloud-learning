@@ -1,6 +1,7 @@
 package com.owen.jsonUtil;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +15,6 @@ import java.util.*;
 /**
  * @desc: TODO describe what you do
  * Created by huang_b on 2017/7/19.
- * 
  */
 public class JacksonUtils {
 
@@ -50,6 +50,7 @@ public class JacksonUtils {
 
     /**
      * Object 转 Json字符串
+     *
      * @param object 元素类型
      * @return
      */
@@ -59,6 +60,7 @@ public class JacksonUtils {
 
     /**
      * Object 转 Json字符串
+     *
      * @param object 元素类型
      * @return
      */
@@ -75,6 +77,7 @@ public class JacksonUtils {
 
     /**
      * JSON 转Object
+     *
      * @param json json字符串
      * @param clzz 元素类型
      * @param <T>
@@ -91,6 +94,7 @@ public class JacksonUtils {
 
     /**
      * JSON 转Object
+     *
      * @param object json字符串
      * @param clzz   元素类型
      * @param <T>
@@ -109,6 +113,7 @@ public class JacksonUtils {
 
     /**
      * 获取泛型的Collection Type
+     *
      * @param jsonStr         json字符串
      * @param collectionClass 泛型的Collection
      * @param elementClasses  元素类型
@@ -124,10 +129,10 @@ public class JacksonUtils {
 
     }
 
-    
-    
+
     /**
      * 获取泛型的Collection Type
+     *
      * @param jsonStr         json字符串
      * @param collectionClass 泛型的Collection
      * @param elementClasses  元素类型
@@ -148,16 +153,6 @@ public class JacksonUtils {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public static Field[] getFields(Object obj) {
         Field[] declaredFields = obj.getClass().getDeclaredFields();
         if (obj.getClass().getSuperclass() != null) {
@@ -168,9 +163,10 @@ public class JacksonUtils {
         }
         return declaredFields;
     }
-    
+
     /**
      * 转带泛型的Bean
+     *
      * @param json
      * @param beanClass
      * @param genericClass
@@ -182,11 +178,16 @@ public class JacksonUtils {
             JavaType bean = read.getTypeFactory().constructParametrizedType(beanClass, beanClass, genericClass);
             return read.readValue(json, read.getTypeFactory().constructType(bean));
             //return read.readValue(json, bean);
-            
+
             //return read.readValue(json,new TypeReference<CommonRS<OrderDetailRS>>(){});
         } catch (IOException e) {
             throw new RuntimeException("JSON转对象出错：" + json, e);
         }
 
+    }
+
+    public static <T> T toCommonrsListData(String json, TypeReference<?> typeReference) throws IOException {
+
+        return read.readValue(json, typeReference);
     }
 }
