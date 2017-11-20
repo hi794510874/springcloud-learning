@@ -27,10 +27,16 @@ public class DruidDataSourceConfiguration {
         DruidDataSource druidDataSource = new DruidDataSource();
         String jdbcURL = jdbcConfig.getSpringDataSourceUrl();
         druidDataSource.setUrl(jdbcURL);
-        druidDataSource.setFilters("stat");//druid 要监控mybatis 的sql 必须加这行代码
-       /* druidDataSource.setPassword();
+           /* druidDataSource.setPassword();
         druidDataSource.setUsername();
         druidDataSource.setDriverClassName();*/
+
+        druidDataSource.setFilters("stat");//druid 要监控mybatis 的sql 必须加这行代码
+
+        druidDataSource.setTimeBetweenLogStatsMillis(1000);  //隔1s就把druid监控的sql数据 发送出来
+        druidDataSource.setStatLogger(new DruidLogger());//重写sql监控数据的实例
+
+
         return druidDataSource;
     }
 }
