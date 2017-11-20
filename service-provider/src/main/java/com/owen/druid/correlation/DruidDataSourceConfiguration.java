@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 
 /**
@@ -22,10 +23,11 @@ public class DruidDataSourceConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     @RefreshScope
-    public DataSource druidDataSource() {
+    public DataSource druidDataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
         String jdbcURL = jdbcConfig.getSpringDataSourceUrl();
         druidDataSource.setUrl(jdbcURL);
+        druidDataSource.setFilters("stat");//druid 要监控mybatis 的sql 必须加这行代码
        /* druidDataSource.setPassword();
         druidDataSource.setUsername();
         druidDataSource.setDriverClassName();*/
