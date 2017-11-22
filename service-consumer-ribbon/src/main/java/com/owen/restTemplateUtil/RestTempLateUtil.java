@@ -23,7 +23,7 @@ public class RestTempLateUtil<T> {
     @Autowired
     RestTemplate restTemplate;
 
-    public CommonRS<T> Get(HashMap<String, ?> args, TypeReference<?> typeReference,String url) throws IOException {
+    public CommonRS<T> Get(HashMap<String, ?> args, TypeReference<?> typeReference, String url) throws IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
@@ -41,18 +41,17 @@ public class RestTempLateUtil<T> {
     }
 
 
-    public CommonRS<T> Post(T t, Class<T> clszz) {
+    public CommonRS<T> Post(HashMap<String, ?> args, String url,  TypeReference<?> typeReference,T t) throws IOException {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("Content-Type", "application/json; charset=UTF-8");
         requestHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
-        CommonRQ<T> reqEntity = new CommonRQ<>();
-        reqEntity.data = t;
-        HttpEntity<CommonRQ<T>> requestEntity = new HttpEntity<>(reqEntity, requestHeaders);
-        ResponseEntity<String> result = restTemplate.exchange("http://service-provider/saveperson?", HttpMethod.POST, requestEntity, String.class);
+
+        HttpEntity<T> requestEntity = new HttpEntity<>(t, requestHeaders);
+        ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class, args);
 
         String response = result.getBody();
 
-        CommonRS<T> rs = JacksonUtils.toGenericBean(response, CommonRS.class, clszz);
+        CommonRS<T> rs = JacksonUtils.toCommonrsListData(response, typeReference);
         return rs;
     }
 }

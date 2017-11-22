@@ -23,11 +23,11 @@ public interface BlogMapper {
     })
     BlogEntity getOne(String id);
 
-    @Insert("INSERT INTO Blogs(Title,Content) VALUES(#{Title}, #{Content})")
-    void insert(BlogEntity user);
+    @Insert("INSERT INTO Blogs(id,Title,Content) VALUES(#{id},#{Title}, #{Content})")
+    void insert(BlogEntity entity);
 
     @Update("UPDATE Blogs SET Title=#{Title},Content=#{Content} WHERE id =#{id}")
-    void update(BlogEntity user);
+    void update(BlogEntity entity);
 
     @Delete("DELETE FROM Blogs WHERE id =#{id}")
     void delete(Long id);

@@ -2,6 +2,7 @@ package com.owen.controller;
 
 import com.owen.mapper.BlogMapper;
 import com.owen.model.BlogEntity;
+import com.owen.model.CommonRQ;
 import com.owen.model.CommonRS;
 import com.owen.model.Head;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,7 @@ public class BlogController {
     /*@GetMapping(value = "getblogbyid")*/
     @RequestMapping(value = "/getblogbyid/{id}", method = RequestMethod.GET)
     public CommonRS<BlogEntity> getBlogById(@PathVariable String id) throws Exception {
-        if(id.equals("ex")){
-            throw new Exception("test spring retry");
-        }
+
         BlogEntity blogEntity = blogMapper.getOne(id);
         CommonRS<BlogEntity> blogEntityCommonRS = new CommonRS<>();
         Head head = new Head();
@@ -47,5 +46,20 @@ public class BlogController {
         head.setCode(200);
         listBlogCommonRS.setHead(head);
         return listBlogCommonRS;
+    }
+
+    @RequestMapping(value = "addBlog/{id}", method = RequestMethod.POST)
+    public CommonRS<Boolean> addBlog(@RequestBody CommonRQ<BlogEntity> request, @PathVariable String id) {
+        BlogEntity entity = request.data;
+        entity.setId(id);
+        blogMapper.insert(entity);
+
+        CommonRS<Boolean> rs = new CommonRS<>();
+        Head head = new Head();
+        head.setCode(200);
+        head.setMsg("ok");
+        rs.setData(true);
+        rs.setHead(head);
+        return rs;
     }
 }

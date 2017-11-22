@@ -1,6 +1,7 @@
 package com.owen.services;
 
 import com.owen.model.BlogEntity;
+import com.owen.model.CommonRQ;
 import com.owen.model.CommonRS;
 import com.owen.restTemplateUtil.RestTempLateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,12 @@ public class BlogService {
         return listBlogEntityCommonRS;
     }
 
+    public CommonRS<Boolean> addBlog(CommonRQ<BlogEntity> request, String id) throws IOException {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        TypeReference<CommonRS<Boolean>> typeReference = new TypeReference<CommonRS<Boolean>>() {
+        };
+        CommonRS<Boolean> rs = restTempLateUtil.Post(hashMap, "http://service-provider/addBlog/{id}", typeReference, request);
+        return rs;
+    }
 }
