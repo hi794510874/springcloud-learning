@@ -21,7 +21,10 @@ public class BlogController {
 
     /*@GetMapping(value = "getblogbyid")*/
     @RequestMapping(value = "/getblogbyid/{id}", method = RequestMethod.GET)
-    public CommonRS<BlogEntity> getBlogById(@PathVariable String id) {
+    public CommonRS<BlogEntity> getBlogById(@PathVariable String id) throws Exception {
+        if(id.equals("ex")){
+            throw new Exception("test spring retry");
+        }
         BlogEntity blogEntity = blogMapper.getOne(id);
         CommonRS<BlogEntity> blogEntityCommonRS = new CommonRS<>();
         Head head = new Head();
@@ -29,7 +32,9 @@ public class BlogController {
         head.setMsg("ok");
         blogEntityCommonRS.setData(blogEntity);
         blogEntityCommonRS.setHead(head);
+
         return blogEntityCommonRS;
+
     }
 
     @RequestMapping(value = "getAllBlog", method = RequestMethod.GET)

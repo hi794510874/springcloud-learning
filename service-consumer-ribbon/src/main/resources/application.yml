@@ -21,8 +21,18 @@ spring:
         port: 5672
         username: admin
         password: admin
+  cloud:
+    loadbalancer:
+      retry:
+        #启动resttemplate 失败重试机制 引入spring retry
+        enabled: false
+
 management:
   security:
 #  设为false后/health能拿到更多信息
     enabled: false
+
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 7000  # 执行超过7s hystrix command 起作用  如果直接让被调用的服务停掉 又没起作用
+
+
+
