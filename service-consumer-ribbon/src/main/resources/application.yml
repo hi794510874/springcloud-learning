@@ -34,5 +34,8 @@ management:
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 7000  # 执行超过7s hystrix command 起作用  如果直接让被调用的服务停掉 又没起作用
 
+spring.boot.admin.url: http://localhost:8769
+
+
 
 

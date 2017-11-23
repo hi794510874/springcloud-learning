@@ -1,6 +1,19 @@
 #http://localhost:8001/rmq/dev/master  可以通过这个地址 看到从git上拉下来的文件
 server:
   port: 8001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    ip-address: ${spring.cloud.client.ipAddress}
+    appname: config-server #swaggerui 集成时会遇到的问题    写appname后不会有 还没测试 待验证
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+
+#   定期通知eureka server还活着 rennew  默认30s
+#    lease-renewal-interval-in-seconds: 30
+
 
 spring:
   cloud:
@@ -24,3 +37,4 @@ spring:
 management:
   security:
     enabled: false
+spring.boot.admin.url: http://localhost:8769

@@ -9,7 +9,6 @@ eureka:
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
 #   定期通知eureka server还活着 rennew  默认30s
 #    lease-renewal-interval-in-seconds: 30
-
 server:
   port: 8763
 
@@ -46,3 +45,6 @@ management:
 
 logging.level.com.owen.mapper: DEBUG  #打印mybatis sql
 mybatis.type-aliases-package: com.owen.model
+
+spring.boot.admin.url: http://localhost:8769
+
