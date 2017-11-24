@@ -1,12 +1,15 @@
 package com.owen.controller;
 
+import com.owen.jsonUtil.JacksonUtils;
 import com.owen.mapper.BlogMapper;
 import com.owen.model.BlogEntity;
 import com.owen.model.CommonRQ;
 import com.owen.model.CommonRS;
 import com.owen.model.Head;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.sleuth.SpanAccessor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.cloud.sleuth.Tracer;
 
 import java.util.List;
 
@@ -19,6 +22,11 @@ public class BlogController {
 
     @Autowired
     private BlogMapper blogMapper;
+    @Autowired
+    private Tracer tracer;
+
+    @Autowired
+    private SpanAccessor accessor;
 
     /*@GetMapping(value = "getblogbyid")*/
     @RequestMapping(value = "/getblogbyid/{id}", method = RequestMethod.GET)
@@ -32,6 +40,7 @@ public class BlogController {
         blogEntityCommonRS.setData(blogEntity);
         blogEntityCommonRS.setHead(head);
 
+        this.tracer.addTag("result", JacksonUtils.toJson(blogEntityCommonRS));
         return blogEntityCommonRS;
 
     }

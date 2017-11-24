@@ -18,8 +18,8 @@ spring:
     #    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
         username: sa
         password: ctripwingonuat
-    zipkin:
-      base-url: http://localhost:8790
+#    zipkin:
+#      base-url: http://localhost:8790
 
     #让 zipkin收集数据更及时
     sleuth:

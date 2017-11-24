@@ -12,15 +12,15 @@ server:
 spring:
   application:
     name: service-ribbon
-  zipkin:
-    base-url: http://localhost:8790
-    enabled: true
+#  zipkin:
+#    base-url: http://localhost:8790
+#    enabled: true
    #让 zipkin收集数据更及时
   sleuth:
     sampler:
       percentage: 1
   rabbitmq:
-        host: 172.18.21.116
+        host: 172.18.21.189
         port: 5672
         username: admin
         password: admin
