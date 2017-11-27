@@ -39,10 +39,9 @@ public class BlogController {
         head.setMsg("ok");
         blogEntityCommonRS.setData(blogEntity);
         blogEntityCommonRS.setHead(head);
-
-        this.tracer.addTag("result", JacksonUtils.toJson(blogEntityCommonRS));
+        this.tracer.addTag("request", JacksonUtils.toJson(id));
+        this.tracer.addTag("response", JacksonUtils.toJson(blogEntityCommonRS));
         return blogEntityCommonRS;
-
     }
 
     @RequestMapping(value = "getAllBlog", method = RequestMethod.GET)
@@ -69,6 +68,9 @@ public class BlogController {
         head.setMsg("ok");
         rs.setData(true);
         rs.setHead(head);
+
+        this.tracer.addTag("request", JacksonUtils.toJson(request));
+        this.tracer.addTag("response", JacksonUtils.toJson(rs));
         return rs;
     }
 }

@@ -5,24 +5,27 @@ spring:
     name: zipkin-server
   sleuth:
     enabled: false
-  zipkin:
-    storage:
-      type: elasticsearch
-      StorageComponent: elasticsearch
-      elasticsearch:
-        cluster: elasticsearch
-        max-requests: 30
-        index: zipkin
-        index-shards: 3
-        index-replicas: 1
-        hosts: localhost:9200
-
-
   rabbitmq:
-        host: 172.18.21.189
-        port: 5672
-        username: admin
-        password: admin
+    host: 172.18.21.189
+    port: 5672
+    username: admin
+    password: admin
+
+zipkin:
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      cluster: elasticsearch
+      hosts: 127.0.0.1:9200
+      index: zipkin
+      index-shards: 5
+      index-replicas: 1
+
+      timeout: 10000
+
+
+
+
 
 eureka:
   client:
