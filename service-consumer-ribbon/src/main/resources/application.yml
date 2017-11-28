@@ -11,7 +11,7 @@ server:
   port: 8764
 spring:
   application:
-    name: service-ribbon
+    name: service-consumer
 #  zipkin:
 #    base-url: http://localhost:8790
 #    enabled: true
