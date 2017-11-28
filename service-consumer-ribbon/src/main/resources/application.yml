@@ -19,6 +19,8 @@ spring:
   sleuth:
     sampler:
       percentage: 1
+    web:
+      skip-pattern: health|/info|/health/|/health|/info/|info
   rabbitmq:
         host: 172.18.21.189
         port: 5672

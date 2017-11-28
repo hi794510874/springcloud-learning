@@ -8,13 +8,15 @@ eureka:
       appname: service-zuul
       instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
 server:
-  port: 8769
+  port: 8770
 spring:
   application:
     name: service-zuul
   sleuth:
     sampler:
       percentage: 1
+    web:
+      skip-pattern: /api/applications|/api|health|/info|/health/|/health|/info/|info  # sleuth 不会收集 匹配的路径
   rabbitmq:
         host: 172.18.21.189
         port: 5672
