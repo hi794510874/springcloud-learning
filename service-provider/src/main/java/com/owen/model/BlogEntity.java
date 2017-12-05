@@ -1,9 +1,11 @@
 package com.owen.model;
 
+import java.io.Serializable;
+
 /**
  * Created by huang_b on 2017/9/4.
  */
-public class BlogEntity {
+public class BlogEntity implements Serializable {
     public String getId() {
         return Id;
     }

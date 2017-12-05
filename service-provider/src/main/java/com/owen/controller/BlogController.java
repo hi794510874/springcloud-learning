@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by huang_b on 2017/9/25.
+ * redis  自动缓存 http://blog.csdn.net/tianyaleixiaowu/article/details/70314277
  *//*
 @RequestMapping("blog")*/
 @RestController
@@ -41,6 +42,9 @@ public class BlogController {
         blogEntityCommonRS.setHead(head);
         this.tracer.addTag("request", JacksonUtils.toJson(id));
         this.tracer.addTag("response", JacksonUtils.toJson(blogEntityCommonRS));
+
+
+
         return blogEntityCommonRS;
     }
 
