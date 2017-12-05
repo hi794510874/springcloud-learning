@@ -3,6 +3,7 @@ package com.owen.mapper;
 import com.owen.model.BlogEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -32,9 +33,11 @@ public interface BlogMapper {
     @Insert("INSERT INTO Blogs(id,Title,Content) VALUES(#{id},#{Title}, #{Content})")
     void insert(BlogEntity entity);
 
+    @CachePut(key = "#p0.id")
     @Update("UPDATE Blogs SET Title=#{Title},Content=#{Content} WHERE id =#{id}")
     void update(BlogEntity entity);
 
+    @CacheEvict(key = "#p0")
     @Delete("DELETE FROM Blogs WHERE id =#{id}")
     void delete(String id);
 }
