@@ -125,8 +125,6 @@ public class BlogController {
 
         String hash = "ddd";
 
-
-//        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.opsForHash().put(hash, "kkkt", request);
 
         request = (CommonRQ<BlogEntity>) redisTemplate.opsForHash().get(hash, "kkkt");
