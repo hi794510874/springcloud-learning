@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -17,4 +21,5 @@ public class ServiceProviderApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServiceProviderApplication.class, args);
     }
+
 }

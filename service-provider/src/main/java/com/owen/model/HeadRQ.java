@@ -1,9 +1,11 @@
 package com.owen.model;
 
+import java.io.Serializable;
+
 /**
  * Created by huang_b on 2017/9/15.
  */
-public class HeadRQ {
+public class HeadRQ  implements Serializable {
     public String getClientID() {
         return clientID;
     }

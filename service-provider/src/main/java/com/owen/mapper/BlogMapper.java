@@ -21,7 +21,7 @@ public interface BlogMapper {
     })
     List<BlogEntity> getAll();
 
-    @Cacheable(key = "#p0")
+    @Cacheable()
     @Select("SELECT * FROM Blogs WHERE id = #{id}")
     @Results({
             @Result(property = "Title", column = "Title"),
@@ -29,15 +29,15 @@ public interface BlogMapper {
     })
     BlogEntity getOne(String id);
 
-    @CachePut(key = "#p0.id")
+    @CachePut()
     @Insert("INSERT INTO Blogs(id,Title,Content) VALUES(#{id},#{Title}, #{Content})")
     void insert(BlogEntity entity);
 
-    @CachePut(key = "#p0.id")
+    @CachePut()
     @Update("UPDATE Blogs SET Title=#{Title},Content=#{Content} WHERE id =#{id}")
     void update(BlogEntity entity);
 
-    @CacheEvict(key = "#p0")
+    @CacheEvict()
     @Delete("DELETE FROM Blogs WHERE id =#{id}")
     void delete(String id);
 }

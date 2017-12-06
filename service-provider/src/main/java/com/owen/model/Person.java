@@ -2,12 +2,13 @@ package com.owen.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by huang_b on 2017/9/13.
  */
-public class Person {
+public class Person  implements Serializable {
     public String getName() {
         return name;
     }

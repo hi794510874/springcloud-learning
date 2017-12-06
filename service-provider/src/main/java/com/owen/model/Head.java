@@ -1,9 +1,11 @@
 package com.owen.model;
 
+import java.io.Serializable;
+
 /**
  * Created by huang_b on 2017/9/13.
  */
-public class Head {
+public class Head  implements Serializable {
       public int getCode() {
         return code;
     }
