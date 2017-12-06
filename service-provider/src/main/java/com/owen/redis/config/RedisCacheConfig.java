@@ -12,10 +12,7 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -30,6 +27,9 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    /*
+    * 将redistemplate 的 key 序列化换成 string  value序列化换成 jackson
+    * */
     @Bean
     public RedisTemplate getRedisTemplate() {
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
@@ -51,7 +51,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         return redisTemplate;
     }
 
-    /* redis key 生成策略*/
+    /* redis key 生成策略  */
 
     @Override
     @Bean

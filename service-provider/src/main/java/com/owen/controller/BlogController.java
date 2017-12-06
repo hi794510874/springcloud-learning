@@ -1,19 +1,16 @@
 package com.owen.controller;
 
-import com.netflix.discovery.converters.Auto;
 import com.owen.jsonUtil.JacksonUtils;
 import com.owen.mapper.BlogMapper;
 import com.owen.model.BlogEntity;
 import com.owen.model.CommonRQ;
 import com.owen.model.CommonRS;
 import com.owen.model.Head;
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.SpanAccessor;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.cloud.sleuth.Tracer;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,8 +34,6 @@ public class BlogController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @Auto
-    private ApplicationContext applicationContext;
 
     /*@GetMapping(value = "getblogbyid")*/
     @RequestMapping(value = "/getblogbyid/{id}", method = RequestMethod.GET)
@@ -102,6 +97,23 @@ public class BlogController {
         rs.setHead(head);
         return rs;
     }
+
+    @RequestMapping(value = "/updateblogbyid/{id}", method = RequestMethod.POST)
+    public CommonRS<BlogEntity> updateBlogById(@RequestBody CommonRQ<BlogEntity> request) throws Exception {
+
+        blogMapper.update(request.data);
+        CommonRS<BlogEntity> blogEntityCommonRS = new CommonRS<>();
+        Head head = new Head();
+        head.setCode(200);
+        head.setMsg("ok");
+        blogEntityCommonRS.setData(request.data);
+        blogEntityCommonRS.setHead(head);
+        this.tracer.addTag("request", JacksonUtils.toJson(request));
+        this.tracer.addTag("response", JacksonUtils.toJson(blogEntityCommonRS));
+
+        return blogEntityCommonRS;
+    }
+
 
     @RequestMapping(value = "/saveperson2redis/{id}", method = RequestMethod.POST)
     public CommonRS<Boolean> saveperson2redis(@RequestBody CommonRQ<BlogEntity> request) {
