@@ -6,6 +6,7 @@ import com.owen.model.BlogEntity;
 import com.owen.model.CommonRQ;
 import com.owen.model.CommonRS;
 import com.owen.model.Head;
+import com.owen.redis.helper.RedisHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.SpanAccessor;
 import org.springframework.cloud.sleuth.Tracer;
@@ -62,6 +63,7 @@ public class BlogController {
         head.setMsg("ok");
         head.setCode(200);
         listBlogCommonRS.setHead(head);
+
         return listBlogCommonRS;
     }
 

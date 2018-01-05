@@ -37,4 +37,4 @@ spring:
 management:
   security:
     enabled: false
-spring.boot.admin.url: http://localhost:8769
+#spring.boot.admin.url: http://localhost:8769

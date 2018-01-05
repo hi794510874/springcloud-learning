@@ -6,7 +6,7 @@ eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
-  environment: debug
+#    environment: debug
 #    设置超过多久没有renews请求则认为是失效 默认90s
 #    lease-expiration-duration-in-seconds: 90
   client:

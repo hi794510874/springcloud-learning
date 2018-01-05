@@ -1,5 +1,6 @@
 package com.owen;
 
+import com.owen.compress.Lz4Helper;
 import com.owen.compress.SnappyHelper;
 import com.owen.jsonUtil.JacksonUtils;
 import com.owen.model.BlogEntity;
@@ -16,15 +17,18 @@ public class ServiceProviderApplicationTests {
 
     @Test
     public void contextLoads() throws IOException, ClassNotFoundException {
-       /* BlogEntity blogEntity = new BlogEntity();
+        BlogEntity blogEntity = new BlogEntity();
         blogEntity.setId("345345345");
         blogEntity.setContent("dfsgdgfgdf");
         blogEntity.setTitle("dfgfdgdf");
-        byte[] bytes = SnappyHelper.snappyCompress(blogEntity);
+      /*  byte[] bytes = SnappyHelper.snappyCompress(blogEntity);
         blogEntity = SnappyHelper.snappyDeCompress(bytes);
         System.out.println(JacksonUtils.toJson(blogEntity));*/
 
+       /* byte[] bytes = Lz4Helper.lz4Compress(blogEntity);
 
+        blogEntity = Lz4Helper.lz4Decompress(bytes);
+        System.out.println(JacksonUtils.toJson(blogEntity));*/
     }
 
 }

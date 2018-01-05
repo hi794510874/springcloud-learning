@@ -43,7 +43,7 @@ spring:
       password: admin
     redis:
       cluster:
-        nodes: 192.168.119.128:7000,192.168.119.128:7001,192.168.119.128:7002,192.168.119.128:7003,192.168.119.128:7004,192.168.119.128:7005
+        nodes: 172.18.21.167:8001,172.18.21.167:8002,172.18.21.167:8003,172.18.21.168:8004,172.18.21.168:8005,172.18.21.168:8006
 
 management:
   security:
@@ -52,6 +52,6 @@ management:
 logging.level.com.owen.mapper: DEBUG  #打印mybatis sql
 mybatis.type-aliases-package: com.owen.model
 
-spring.boot.admin.url: http://localhost:8769
+#spring.boot.admin.url: http://localhost:8769
 
 

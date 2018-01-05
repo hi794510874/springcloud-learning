@@ -7,16 +7,17 @@
     <groupId>com.owen</groupId>
     <artifactId>microservice</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <modules>
         <module>config-client</module>
         <module>config-server</module>
         <module>eureka-server</module>
         <module>service-consumer-ribbon</module>
+        <module>service-consumer-feign</module>
         <module>service-provider</module>
         <module>service-zuul</module>
         <module>zipkin-server</module>
         <module>spring-boot-admin-server</module>
     </modules>
-
 
 </project>
