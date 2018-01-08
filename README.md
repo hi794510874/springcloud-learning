@@ -12,6 +12,6 @@ resttemplate:get和post简单封装
 
 spring retry :有加进来 简单测试了下 service-consumer调用service-provider失败后重试的场景
 
-spring-boot-admin：向eureka-server中注册,并且监控service-provider、service-consumer和config-server。
+spring-boot-admin：向eureka-server中注册,并且监控service-provider、service-consumer和config-server。tip: spring-boot-admin会从eureka中获取各个应用的信息
 
 zipkin:记录各服务之间的调用链路 默认数据放在内存 ,可以配置在es  ,可以在链路数据中添加自定义的数据 tracer.addTag
