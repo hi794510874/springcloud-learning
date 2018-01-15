@@ -16,8 +16,7 @@ import java.util.Set;
  */
 @Configuration
 public class JedisClusterInstance {
-    @Value("${redis.cluster}")
-    private List<String> nodes;
+
 
     @Bean
     public JedisCluster CreateJedisClusterInstance() {
