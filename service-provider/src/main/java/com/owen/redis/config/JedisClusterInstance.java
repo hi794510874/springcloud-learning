@@ -1,15 +1,11 @@
 package com.owen.redis.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by huang_b on 2017/12/12.
