@@ -26,10 +26,10 @@ zuul:
   routes:
     api-a:
       path: /api-a/**
-      serviceId: service-consumer
+      serviceId: service-consumer-ribbon
     api-b:
       path: /api-b/**
-      serviceId: service-feign
+      serviceId: service-consumer-feign
 management:
   security:
 #  设为false后/health能拿到更多信息

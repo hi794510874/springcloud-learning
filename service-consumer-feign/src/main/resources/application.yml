@@ -13,3 +13,12 @@ server:
 spring:
   application:
     name: service-consumer-feign
+  sleuth:
+    sampler:
+      percentage: 1
+  rabbitmq:
+      host: 172.18.21.189
+      port: 5672
+      username: admin
+      password: admin
+

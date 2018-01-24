@@ -18,8 +18,8 @@ public class Swagger2 {
     public Docket createRestApi() {
 
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("LogRestApi 项目接口文档")
-                .description("Log项目的接口文档，符合RESTful API。")
+                .title("services-consumer-ribon 项目接口文档")
+                .description("services-consumer-ribon项目的接口文档，符合RESTful API。")
                 .version("1.0")
                 .build();
 
