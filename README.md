@@ -17,7 +17,7 @@
     * 向eureka-server中注册,并且监控service-provider、service-consumer和config-server。tip: spring-boot-admin会从eureka中获取各个应用的信息
     
 * [zipk-server](#zipk-server)
-    * 记录各服务之间的链路数据，添加自定义数据 tracer.addTag(key,val) ，数据保存到es，zipkin-ui中自定义查询语法还不清楚。。。。，
+    * 记录各服务之间的链路数据，添加自定义数据 tracer.addTag(key,val) ，数据保存到es，zipkin-ui中自定义查询语法还不清楚。。。。，其实就是rmq的消费者。但是在消费feign的链路数据的时候报异常,是因为cloud的版本不同？？待解决.....
     * es中的查询示例：
 	    <pre>		
 			GET  zipkin-2018-01-24/_search
