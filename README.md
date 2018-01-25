@@ -56,7 +56,7 @@
     * 待续.......
         
 * [rabbitmp](#rabbitmp)
-    * 待续.......
+    * service-provider发rmq消息，rmqconsumer中处理，sender-->exchange-->exchange->queue-->consumer
     
     
     
