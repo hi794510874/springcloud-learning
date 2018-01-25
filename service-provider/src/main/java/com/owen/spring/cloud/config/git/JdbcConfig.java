@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 @RefreshScope
 public class JdbcConfig {
+
+//    git仓库中文件 内容 "spring-datasource-url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test"
     @Value("${spring-datasource-url}")
     private String springDataSourceUrl;
 
