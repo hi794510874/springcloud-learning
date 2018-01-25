@@ -1,8 +1,9 @@
 package com.owen.rabbitmqUtil;
 
-import com.rabbitmq.client.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.rabbitmq.client.BuiltinExchangeType;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -10,7 +11,6 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by huang_b on 2018/1/25.
  */
-@Component
 public class RmqHelper {
     /*交换机名称*/
     public static final String EntryExchange = "what.Exchange.Entry";
@@ -22,33 +22,17 @@ public class RmqHelper {
     public static final String LogQueue = "what.Queue.4Log";
     public static final String BussinessQueue = "what.Queue.4Bussiness";
 
-    @Autowired
-    private RmqConfig rmqConfig;
+    RmqConfig rmqConfig = new RmqConfig();
 
-    public void send(String msg) throws IOException, TimeoutException {
 
+    public static void initAmq() throws IOException, TimeoutException {
+        RmqConfig.loadProperties();
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(rmqConfig.getrmqHost());
-        factory.setPort(Integer.parseInt(rmqConfig.getRmqProt()));
+        factory.setHost(RmqConfig.getHost());
+        factory.setPort(Integer.parseInt(RmqConfig.getPort()));
 //        factory.setVirtualHost("test");
-        factory.setUsername(rmqConfig.getRmqUserName());
-        factory.setPassword(rmqConfig.getRmqPassword());
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
-
-        channel.basicPublish(EntryExchange, BussinessQueue, null, msg.getBytes());
-        channel.close();
-        connection.close();
-
-    }
-
-    public void initAmq() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(rmqConfig.getrmqHost());
-        factory.setPort(Integer.parseInt(rmqConfig.getRmqProt()));
-//        factory.setVirtualHost("test");
-        factory.setUsername(rmqConfig.getRmqUserName());
-        factory.setPassword(rmqConfig.getRmqPassword());
+        factory.setUsername(RmqConfig.getUserName());
+        factory.setPassword(RmqConfig.getPassWord());
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 

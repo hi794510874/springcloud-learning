@@ -8,6 +8,7 @@ import com.owen.model.CommonRQ;
 import com.owen.model.CommonRS;
 import com.owen.model.Head;
 import com.owen.rabbitmqUtil.RmqConfig;
+import com.owen.rabbitmqUtil.RmqHelper;
 import com.owen.redis.helper.RedisHelper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -44,6 +45,9 @@ public class BlogController {
 
     @Autowired
     private RmqConfig rmqConfig;
+
+    @Autowired
+    private RmqHelper rmqHelper;
 
     /*@GetMapping(value = "getblogbyid")*/
     @RequestMapping(value = "/getblogbyid/{id}", method = RequestMethod.GET)
@@ -150,30 +154,9 @@ public class BlogController {
     public CommonRS<Boolean> sendRmqMessage(@RequestBody CommonRQ<BlogEntity> request) throws IOException, TimeoutException {
 
         CommonRS<Boolean> result = new CommonRS<Boolean>();
-        String host = rmqConfig.getrmqHost();
-        String port = rmqConfig.getRmqProt();
-        String userName = rmqConfig.getRmqUserName();
-        String passWord = rmqConfig.getRmqPassword();
-
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(host);
-        factory.setPort(Integer.parseInt(port));
-        factory.setUsername(userName);
-        factory.setPassword(passWord);
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
-
-        channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
-
-        String message = JacksonUtils.toJson(request);
-
-        channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
-        System.out.println(" [x] Sent '" + message + "'");
-
-        channel.close();
-        connection.close();
-
-
+        rmqHelper.initAmq();
+        rmqHelper.send(JacksonUtils.toJson(request));
+        result.setData(true);
         return result;
     }
 }

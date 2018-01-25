@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * Created by huang_b on 2018/1/25.
  */
@@ -36,4 +40,6 @@ public class RmqConfig {
     public String getRmqPassword() {
         return rmqPassword;
     }
+
+
 }
