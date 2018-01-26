@@ -18,7 +18,7 @@
         <module>service-zuul</module>
         <module>zipkin-server</module>
         <module>spring-boot-admin-server</module>
-        <module>rmqconsumer</module>
+        <module>rmq-consumer</module>
     </modules>
 
 </project>

@@ -15,7 +15,7 @@ public class RmqConfig {
     static Properties pps;
 
     public static void loadProperties() {
-        InputStream in = App.class.getClassLoader().getResourceAsStream("application.properties");
+        InputStream in = RmqConfig.class.getClassLoader().getResourceAsStream("application.properties");
         pps = new Properties();
         try {
             pps.load(in);
