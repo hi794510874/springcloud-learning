@@ -56,8 +56,10 @@
     * 待续.......
         
 * [rabbitmp](#rabbitmp)
-    * service-provider发rmq消息，rmqconsumer中处理，sender-->exchange-->exchange->queue-->consumer。
-    rabbitmq处理业务消息，能保证一致性，消息不丢失，性能稍弱，基本能满足所有场景。收集性能日志还是用Kafka，性能优异，收集日志而生。
+    * service-provider发rmq消息，rmqconsumer中处理，sender-->exchange-->exchange->queue-->consumer
+    
+    
+    
 
  
 
