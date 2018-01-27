@@ -55,6 +55,10 @@
 * [redis](#redis)
     * 待续.......
         
+* [kafka](#kafka)
+    * 待续.......
+
+	
 * [rabbitmp](#rabbitmp)
     * service-provider发rmq消息，rmqconsumer中处理，sender-->exchange-->exchange->queue-->consumer
     
