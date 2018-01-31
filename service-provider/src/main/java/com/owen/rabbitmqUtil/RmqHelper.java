@@ -33,10 +33,11 @@ public class RmqHelper {
 //        factory.setVirtualHost("test");
         factory.setUsername(rmqConfig.getRmqUserName());
         factory.setPassword(rmqConfig.getRmqPassword());
+        //factory.setVirtualHost("fox");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-
-        channel.basicPublish(EntryExchange, BussinessQueue, null, msg.getBytes());
+        AMQP.BasicProperties basicProperties = new AMQP.BasicProperties().builder().deliveryMode(2).build();
+        channel.basicPublish(EntryExchange, BussinessQueue, basicProperties, msg.getBytes());
         channel.close();
         connection.close();
 

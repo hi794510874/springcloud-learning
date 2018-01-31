@@ -21,22 +21,32 @@ public class App {
         factory.setPassword(RmqConfig.getPassWord());
         factory.setUsername(RmqConfig.getUserName());
         Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        final Channel channel = connection.createChannel();
 
-
+        channel.basicQos(0, 20, false);
         channel.queueBind(RmqHelper.BussinessQueue, RmqHelper.BussinessExchange, "");
 
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
         Consumer consumer = new DefaultConsumer(channel) {
+
+
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
-                String message = new String(body, "UTF-8");
-                System.out.println(" [x] Received '" + message + "'");
+                try {
+                    String message = new String(body, "UTF-8");
+                    System.out.println(" [x] Received '" + message + "'");
+//                    throw new Exception();
+                } catch (Exception e) {
+                    //处理失败的拒绝， 并且不重新入队列
+//                    channel.basicReject(envelope.getDeliveryTag(), false);
+                } finally {
+                    //处理完后 ack  不管前面处理的时候 是否异常
+                    channel.basicAck(envelope.getDeliveryTag(), false);
+                }
             }
         };
-        channel.basicConsume(RmqHelper.BussinessQueue, true, consumer);
+
+        channel.basicConsume(RmqHelper.BussinessQueue, false, consumer);
     }
 
 }
