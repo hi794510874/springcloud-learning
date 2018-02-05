@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <!--service-provider 依赖config-server 执行mvn install 命令时config-server要启动 有点麻烦-->
     <groupId>com.owen</groupId>
     <artifactId>service-provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
