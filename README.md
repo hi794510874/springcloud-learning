@@ -60,7 +60,7 @@
 
 	
 * [rabbitmp](#rabbitmp)
-    * service-provider发rmq消息，rmqconsumer中处理，sender-->exchange-->exchange->queue-->consumer
+    * service-provider发rmq消息，rmqconsumer中处理，sender-->exchange-->exchange->queue-->consumer，exchange queue msg 都持久化，consumer处理消息用线程池
     
     
     
