@@ -36,7 +36,8 @@ public class RmqHelper {
         //factory.setVirtualHost("fox");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        AMQP.BasicProperties basicProperties = new AMQP.BasicProperties().builder().deliveryMode(2).build();
+        // deliveryMode(1) 这样设置消息会持久化到硬盘
+        AMQP.BasicProperties basicProperties = new AMQP.BasicProperties().builder().deliveryMode(1).build();
         channel.basicPublish(EntryExchange, BussinessQueue, basicProperties, msg.getBytes());
         channel.close();
         connection.close();
