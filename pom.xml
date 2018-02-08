@@ -19,6 +19,7 @@
         <module>zipkin-server</module>
         <module>spring-boot-admin-server</module>
         <module>rmq-consumer</module>
+        <module>kafka-consumer</module>
     </modules>
 
 </project>

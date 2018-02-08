@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 一个交换机  队列 消息 都持久化的 rabbitmq 消费者，手动ack
+ * 一个交换机  队列 消息 都持久化的 rabbitmq 消费者，手动ack  能保证每个消息都被处理不会丢失且不会被重复处理  重要业务场景 稳定可靠
  * 处理流程  service-provider 发送rmq消息 ， rmq-consumer 每次接收20条消息 并开启线程池来并行处理
  */
 public class App {
