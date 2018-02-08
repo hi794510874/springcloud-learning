@@ -1,11 +1,14 @@
 package com.owen;
 
+import com.owen.consumer.BaseConsumer;
 import com.owen.consumer.BussinessConsumer;
+import com.owen.consumer.ManagerConsumer;
 import com.owen.rabbitmqUtil.RmqConfig;
 import com.owen.rabbitmqUtil.RmqHelper;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -19,10 +22,22 @@ public class App {
 
     public static void main(String[] args) throws TimeoutException, IOException {
 
+        Dictionary<String, BaseConsumer> listConsumers = new Hashtable<String, BaseConsumer>();
+
         RmqHelper.initAmq();
+
         BussinessConsumer bussinessConsumer = new BussinessConsumer();
         bussinessConsumer.queueName = RmqHelper.BussinessQueue;
-        bussinessConsumer.start();
+        bussinessConsumer.startConsumer();
+        listConsumers.put("bussinessConsumer", bussinessConsumer);
+
+        ManagerConsumer managerConsumer = new ManagerConsumer();
+        managerConsumer.queueName = RmqHelper.ManagerQueue;
+        managerConsumer.startConsumer();
+        listConsumers.put("managerConsumer", managerConsumer);
+
+
+        managerConsumer.listConsumers = listConsumers;
 
 //-------------------------------------------下面的代码是ok 的------------------------------------------------------------//
     /*    int threadPoolSize = 20;

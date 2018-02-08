@@ -21,6 +21,7 @@ public class RmqHelper {
     /*队列名称*/
     public static final String LogQueue = "what.Queue.4Log";
     public static final String BussinessQueue = "what.Queue.4Bussiness";
+    public static final String ManagerQueue = "what.Queue.4Manager";
 
     RmqConfig rmqConfig = new RmqConfig();
 
@@ -50,10 +51,12 @@ public class RmqHelper {
         /*声明队列*/
         channel.queueDeclare(LogQueue, true, false, false, null);//队列名  是否持久化
         channel.queueDeclare(BussinessQueue, true, false, false, null);
+        channel.queueDeclare(ManagerQueue, false, false, true, null);
 
         /*队列绑定交换机*/
         channel.queueBind(LogQueue, LogExchange, LogQueue);
         channel.queueBind(BussinessQueue, BussinessExchange, BussinessQueue);
+        channel.queueBind(ManagerQueue, ManagerExchange, "");
 
         channel.close();
         connection.close();

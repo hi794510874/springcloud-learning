@@ -2,10 +2,11 @@ package com.owen.consumer;
 
 import com.owen.DealMessageResult;
 import com.owen.rabbitmqUtil.RmqConfig;
-import com.owen.rabbitmqUtil.RmqHelper;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -15,27 +16,30 @@ import java.util.concurrent.TimeoutException;
  * Created by huang_b on 2018/2/6.
  */
 public abstract class BaseConsumer {
-    public abstract DealMessageResult handleMessage(String msg);
+    public abstract DealMessageResult handleMessage(String msg) throws IOException, TimeoutException;
 
     public String queueName;
+    Connection connection = null;
+    Channel channel = null;
+    ThreadPoolExecutor executor;
+    public Dictionary<String, BaseConsumer> listConsumers;
 
-    public void start() throws IOException, TimeoutException {
+    public void startConsumer() throws IOException, TimeoutException {
         int threadPoolSize = 20;
 
 //        http://blog.csdn.net/qq_25806863/article/details/71126867
         //这种情况是    首先开启 corePoolSize个常驻线程 多的消息来了，开新的线程  当队列达到 capacity的之后 抛出异常 不在工作
-        final ThreadPoolExecutor executor = new ThreadPoolExecutor(3, threadPoolSize, 3, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(10));
+        executor = new ThreadPoolExecutor(3, threadPoolSize, 3, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(10));
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(RmqConfig.getHost());
         factory.setPort(Integer.parseInt(RmqConfig.getPort()));
         factory.setPassword(RmqConfig.getPassWord());
         factory.setUsername(RmqConfig.getUserName());
-        final Connection connection = factory.newConnection();
-        final Channel channel = connection.createChannel();
+        connection = factory.newConnection();
+        channel = connection.createChannel();
 
         channel.basicQos(0, threadPoolSize, false);
-        channel.queueBind(queueName, RmqHelper.BussinessExchange, "");
 
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -77,7 +81,19 @@ public abstract class BaseConsumer {
 
 
         };
-        channel.basicConsume(RmqHelper.BussinessQueue, false, consumer);
+        channel.basicConsume(queueName, false, consumer);
+    }
+
+    public void stopConsumer() throws IOException, TimeoutException {
+        while (true) {
+            //等待线程池中的队列处理完 已接收的消息
+            int queueSize = executor.getQueue().size();
+            if (queueSize == 0) {
+                break;
+            }
+        }
+        channel.close();
+        connection.close();
     }
 
 }
