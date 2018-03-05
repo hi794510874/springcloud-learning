@@ -27,7 +27,7 @@ public class BlogService {
 
     @Retryable(value = Exception.class, maxAttempts = 2, backoff = @Backoff(delay = 2000))
     public CommonRS<BlogEntity> getBlogById(String id) throws IOException {
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>(1);
         hashMap.put("id", id);
         TypeReference<CommonRS<BlogEntity>> typeReference = new TypeReference<CommonRS<BlogEntity>>() {
         };
@@ -41,7 +41,7 @@ public class BlogService {
     }
 
     public CommonRS<List<BlogEntity>> getAllBlog() throws IOException {
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>(16);
         TypeReference<CommonRS<List<BlogEntity>>> typeReference = new TypeReference<CommonRS<List<BlogEntity>>>() {
         };
         CommonRS<List<BlogEntity>> listBlogEntityCommonRS = restTempLateUtil.Get(hashMap, typeReference, "http://service-provider/getAllBlog");
@@ -50,7 +50,7 @@ public class BlogService {
     }
 
     public CommonRS<Boolean> addBlog(CommonRQ<BlogEntity> request, String id) throws IOException {
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>(1);
         hashMap.put("id", id);
         TypeReference<CommonRS<Boolean>> typeReference = new TypeReference<CommonRS<Boolean>>() {
         };

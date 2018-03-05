@@ -7,34 +7,51 @@
 #    ip-address: ${spring.cloud.client.ipAddress}
 #    appname: service-provider #swaggerui 集成时会遇到的问题    写appname后不会有 还没测试 待验证
 #    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
-#
 ##   定期通知eureka server还活着 rennew  默认30s
 ##    lease-renewal-interval-in-seconds: 30
 #server:
 #  port: 8763
+#
 #spring:
-#  zipkin:
-#    base-url: http://localhost:9411
+#    datasource:
+#        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    #    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
+#        username: sa
+#        password: ctripwingonuat
+##    zipkin:
+##      base-url: http://localhost:8790
+#
 #    #让 zipkin收集数据更及时
-#  sleuth:
+#    sleuth:
 #      sampler:
 #        percentage: 1
-#  datasource:
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-##    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
-#    username: sa
-#    password: ctripwingonuat
+#      web:
+#        skip-pattern: health|/info|/health/|/health|/info/|info
+#    application:
+#      index: ${random.int}   # 避免同一个服务部署多个实例 刷新配置的时候 不会刷新的情况
+#      name:  service-provider
+#    cloud:
+#      config:
+#        uri: http://localhost:8001/       # 配置spring cloud config服务端的url
+#        profile: dev                    # 指定profile
+#        label: master                         # 指定gitlab仓库的分支
+#        name: application,rmq,jdbc             # application-dev.yml rmq-dev.yml
+#    rabbitmq:
+#      host: 172.18.21.189
+#      port: 5672
+#      username: admin
+#      password: admin
+#    redis:
+#      cluster:
+#        nodes: 172.18.21.167:8001,172.18.21.167:8002,172.18.21.167:8003,172.18.21.168:8004,172.18.21.168:8005,172.18.21.168:8006
+#
 #management:
 #  security:
-##  设为false后/health能拿到更多信息
-#    enabled: false
-#logging.level.com.owen.mapper: DEBUG
+#    enabled: false   #  设为false后/health能拿到更多信息
+#
+#logging.level.com.owen.mapper: DEBUG  #打印mybatis sql
 #mybatis.type-aliases-package: com.owen.model
 #
-#
-#
-#
-#
-#
+##spring.boot.admin.url: http://localhost:8769
 #
 #
