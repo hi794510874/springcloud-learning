@@ -27,8 +27,7 @@ public abstract class BaseConsumer {
     public void startConsumer() throws IOException, TimeoutException {
         int threadPoolSize = 20;
 
-//        http://blog.csdn.net/qq_25806863/article/details/71126867
-        //这种情况是    首先开启 corePoolSize个常驻线程 多的消息来了，开新的线程  当队列达到 capacity的之后 抛出异常 不在工作
+//       https://www.cnblogs.com/kuoAT/p/6714762.html
         executor = new ThreadPoolExecutor(3, threadPoolSize, 3, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(10));
 
         ConnectionFactory factory = new ConnectionFactory();
