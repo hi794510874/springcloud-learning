@@ -51,7 +51,8 @@ management:
 
 logging.level.com.owen.mapper: DEBUG  #打印mybatis sql
 mybatis.type-aliases-package: com.owen.model
-
+mybatis:
+  mapper-locations: classpath:mybatis/mapping/*.xml
 #spring.boot.admin.url: http://localhost:8769
 
 
