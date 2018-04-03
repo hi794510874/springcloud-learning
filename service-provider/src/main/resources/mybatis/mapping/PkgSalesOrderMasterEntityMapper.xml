@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.owen.mapper.PkgSalesOrderMasterEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.owen.model.PkgSalesOrderMasterEntity" >
+    <id column="SalesOrderNo" property="salesorderno" jdbcType="INTEGER" />
+    <result column="OrderType" property="ordertype" jdbcType="INTEGER" />
+    <result column="ResourceCategory" property="resourcecategory" jdbcType="INTEGER" />
+    <result column="PkgOrderNo" property="pkgorderno" jdbcType="VARCHAR" />
+    <result column="OrderBy" property="orderby" jdbcType="VARCHAR" />
+    <result column="OrderDate" property="orderdate" jdbcType="TIMESTAMP" />
+    <result column="RefSONo" property="refsono" jdbcType="INTEGER" />
+    <result column="FromIP" property="fromip" jdbcType="VARCHAR" />
+    <result column="TotalAmount" property="totalamount" jdbcType="DECIMAL" />
+    <result column="Currency" property="currency" jdbcType="VARCHAR" />
+    <result column="IsCancelled" property="iscancelled" jdbcType="BIT" />
+    <result column="CancelID" property="cancelid" jdbcType="INTEGER" />
+    <result column="Limation" property="limation" jdbcType="NVARCHAR" />
+    <result column="ModifiedBy" property="modifiedby" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+    <result column="ResourceID" property="resourceid" jdbcType="BIGINT" />
+    <result column="Remark" property="remark" jdbcType="NVARCHAR" />
+    <result column="IsCofirmedImmediately" property="iscofirmedimmediately" jdbcType="BIT" />
+    <result column="ResourceRemark" property="resourceremark" jdbcType="NVARCHAR" />
+    <result column="UsageNotice" property="usagenotice" jdbcType="NVARCHAR" />
+    <result column="OperationCaution" property="operationcaution" jdbcType="NVARCHAR" />
+    <result column="IsGiveUp" property="isgiveup" jdbcType="SMALLINT" />
+    <result column="ResourceFromFlag" property="resourcefromflag" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SalesOrderNo, OrderType, ResourceCategory, PkgOrderNo, OrderBy, OrderDate, RefSONo, 
+    FromIP, TotalAmount, Currency, IsCancelled, CancelID, Limation, ModifiedBy, ModifiedDate, 
+    ResourceID, Remark, IsCofirmedImmediately, ResourceRemark, UsageNotice, OperationCaution, 
+    IsGiveUp, ResourceFromFlag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Pkg_SalesOrderMaster
+    where SalesOrderNo = #{salesorderno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Pkg_SalesOrderMaster
+    where SalesOrderNo = #{salesorderno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.owen.model.PkgSalesOrderMasterEntity" >
+    insert into Pkg_SalesOrderMaster (SalesOrderNo, OrderType, ResourceCategory, 
+      PkgOrderNo, OrderBy, OrderDate, 
+      RefSONo, FromIP, TotalAmount, 
+      Currency, IsCancelled, CancelID, 
+      Limation, ModifiedBy, ModifiedDate, 
+      ResourceID, Remark, IsCofirmedImmediately, 
+      ResourceRemark, UsageNotice, OperationCaution, 
+      IsGiveUp, ResourceFromFlag)
+    values (#{salesorderno,jdbcType=INTEGER}, #{ordertype,jdbcType=INTEGER}, #{resourcecategory,jdbcType=INTEGER}, 
+      #{pkgorderno,jdbcType=VARCHAR}, #{orderby,jdbcType=VARCHAR}, #{orderdate,jdbcType=TIMESTAMP}, 
+      #{refsono,jdbcType=INTEGER}, #{fromip,jdbcType=VARCHAR}, #{totalamount,jdbcType=DECIMAL}, 
+      #{currency,jdbcType=VARCHAR}, #{iscancelled,jdbcType=BIT}, #{cancelid,jdbcType=INTEGER}, 
+      #{limation,jdbcType=NVARCHAR}, #{modifiedby,jdbcType=VARCHAR}, #{modifieddate,jdbcType=TIMESTAMP}, 
+      #{resourceid,jdbcType=BIGINT}, #{remark,jdbcType=NVARCHAR}, #{iscofirmedimmediately,jdbcType=BIT}, 
+      #{resourceremark,jdbcType=NVARCHAR}, #{usagenotice,jdbcType=NVARCHAR}, #{operationcaution,jdbcType=NVARCHAR}, 
+      #{isgiveup,jdbcType=SMALLINT}, #{resourcefromflag,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.owen.model.PkgSalesOrderMasterEntity" >
+    insert into Pkg_SalesOrderMaster
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="salesorderno != null" >
+        SalesOrderNo,
+      </if>
+      <if test="ordertype != null" >
+        OrderType,
+      </if>
+      <if test="resourcecategory != null" >
+        ResourceCategory,
+      </if>
+      <if test="pkgorderno != null" >
+        PkgOrderNo,
+      </if>
+      <if test="orderby != null" >
+        OrderBy,
+      </if>
+      <if test="orderdate != null" >
+        OrderDate,
+      </if>
+      <if test="refsono != null" >
+        RefSONo,
+      </if>
+      <if test="fromip != null" >
+        FromIP,
+      </if>
+      <if test="totalamount != null" >
+        TotalAmount,
+      </if>
+      <if test="currency != null" >
+        Currency,
+      </if>
+      <if test="iscancelled != null" >
+        IsCancelled,
+      </if>
+      <if test="cancelid != null" >
+        CancelID,
+      </if>
+      <if test="limation != null" >
+        Limation,
+      </if>
+      <if test="modifiedby != null" >
+        ModifiedBy,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+      <if test="resourceid != null" >
+        ResourceID,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="iscofirmedimmediately != null" >
+        IsCofirmedImmediately,
+      </if>
+      <if test="resourceremark != null" >
+        ResourceRemark,
+      </if>
+      <if test="usagenotice != null" >
+        UsageNotice,
+      </if>
+      <if test="operationcaution != null" >
+        OperationCaution,
+      </if>
+      <if test="isgiveup != null" >
+        IsGiveUp,
+      </if>
+      <if test="resourcefromflag != null" >
+        ResourceFromFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="salesorderno != null" >
+        #{salesorderno,jdbcType=INTEGER},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecategory != null" >
+        #{resourcecategory,jdbcType=INTEGER},
+      </if>
+      <if test="pkgorderno != null" >
+        #{pkgorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refsono != null" >
+        #{refsono,jdbcType=INTEGER},
+      </if>
+      <if test="fromip != null" >
+        #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="iscancelled != null" >
+        #{iscancelled,jdbcType=BIT},
+      </if>
+      <if test="cancelid != null" >
+        #{cancelid,jdbcType=INTEGER},
+      </if>
+      <if test="limation != null" >
+        #{limation,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifiedby != null" >
+        #{modifiedby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceid != null" >
+        #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="iscofirmedimmediately != null" >
+        #{iscofirmedimmediately,jdbcType=BIT},
+      </if>
+      <if test="resourceremark != null" >
+        #{resourceremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="usagenotice != null" >
+        #{usagenotice,jdbcType=NVARCHAR},
+      </if>
+      <if test="operationcaution != null" >
+        #{operationcaution,jdbcType=NVARCHAR},
+      </if>
+      <if test="isgiveup != null" >
+        #{isgiveup,jdbcType=SMALLINT},
+      </if>
+      <if test="resourcefromflag != null" >
+        #{resourcefromflag,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.owen.model.PkgSalesOrderMasterEntity" >
+    update Pkg_SalesOrderMaster
+    <set >
+      <if test="ordertype != null" >
+        OrderType = #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecategory != null" >
+        ResourceCategory = #{resourcecategory,jdbcType=INTEGER},
+      </if>
+      <if test="pkgorderno != null" >
+        PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        OrderBy = #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null" >
+        OrderDate = #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refsono != null" >
+        RefSONo = #{refsono,jdbcType=INTEGER},
+      </if>
+      <if test="fromip != null" >
+        FromIP = #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="totalamount != null" >
+        TotalAmount = #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        Currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="iscancelled != null" >
+        IsCancelled = #{iscancelled,jdbcType=BIT},
+      </if>
+      <if test="cancelid != null" >
+        CancelID = #{cancelid,jdbcType=INTEGER},
+      </if>
+      <if test="limation != null" >
+        Limation = #{limation,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifiedby != null" >
+        ModifiedBy = #{modifiedby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceid != null" >
+        ResourceID = #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="iscofirmedimmediately != null" >
+        IsCofirmedImmediately = #{iscofirmedimmediately,jdbcType=BIT},
+      </if>
+      <if test="resourceremark != null" >
+        ResourceRemark = #{resourceremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="usagenotice != null" >
+        UsageNotice = #{usagenotice,jdbcType=NVARCHAR},
+      </if>
+      <if test="operationcaution != null" >
+        OperationCaution = #{operationcaution,jdbcType=NVARCHAR},
+      </if>
+      <if test="isgiveup != null" >
+        IsGiveUp = #{isgiveup,jdbcType=SMALLINT},
+      </if>
+      <if test="resourcefromflag != null" >
+        ResourceFromFlag = #{resourcefromflag,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where SalesOrderNo = #{salesorderno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.owen.model.PkgSalesOrderMasterEntity" >
+    update Pkg_SalesOrderMaster
+    set OrderType = #{ordertype,jdbcType=INTEGER},
+      ResourceCategory = #{resourcecategory,jdbcType=INTEGER},
+      PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR},
+      OrderBy = #{orderby,jdbcType=VARCHAR},
+      OrderDate = #{orderdate,jdbcType=TIMESTAMP},
+      RefSONo = #{refsono,jdbcType=INTEGER},
+      FromIP = #{fromip,jdbcType=VARCHAR},
+      TotalAmount = #{totalamount,jdbcType=DECIMAL},
+      Currency = #{currency,jdbcType=VARCHAR},
+      IsCancelled = #{iscancelled,jdbcType=BIT},
+      CancelID = #{cancelid,jdbcType=INTEGER},
+      Limation = #{limation,jdbcType=NVARCHAR},
+      ModifiedBy = #{modifiedby,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      ResourceID = #{resourceid,jdbcType=BIGINT},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      IsCofirmedImmediately = #{iscofirmedimmediately,jdbcType=BIT},
+      ResourceRemark = #{resourceremark,jdbcType=NVARCHAR},
+      UsageNotice = #{usagenotice,jdbcType=NVARCHAR},
+      OperationCaution = #{operationcaution,jdbcType=NVARCHAR},
+      IsGiveUp = #{isgiveup,jdbcType=SMALLINT},
+      ResourceFromFlag = #{resourcefromflag,jdbcType=SMALLINT}
+    where SalesOrderNo = #{salesorderno,jdbcType=INTEGER}
+  </update>
+</mapper>

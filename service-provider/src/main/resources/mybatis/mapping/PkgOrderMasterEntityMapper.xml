@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.owen.mapper.PkgOrderMasterEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.owen.model.PkgOrderMasterEntity" >
+    <id column="PkgOrderNo" property="pkgorderno" jdbcType="VARCHAR" />
+    <result column="VerNo" property="verno" jdbcType="CHAR" />
+    <result column="OrderDate" property="orderdate" jdbcType="TIMESTAMP" />
+    <result column="SalesChannel" property="saleschannel" jdbcType="TINYINT" />
+    <result column="SalesOrg" property="salesorg" jdbcType="INTEGER" />
+    <result column="CustMemberID" property="custmemberid" jdbcType="INTEGER" />
+    <result column="CustMemberName" property="custmembername" jdbcType="VARCHAR" />
+    <result column="PackageID" property="packageid" jdbcType="INTEGER" />
+    <result column="PackageName" property="packagename" jdbcType="NVARCHAR" />
+    <result column="OrderStatus" property="orderstatus" jdbcType="TINYINT" />
+    <result column="OrderBy" property="orderby" jdbcType="VARCHAR" />
+    <result column="TotalAmount" property="totalamount" jdbcType="DECIMAL" />
+    <result column="ReceivedAmount" property="receivedamount" jdbcType="DECIMAL" />
+    <result column="AdultQty" property="adultqty" jdbcType="INTEGER" />
+    <result column="ChildQty" property="childqty" jdbcType="INTEGER" />
+    <result column="BabyQty" property="babyqty" jdbcType="INTEGER" />
+    <result column="Currency" property="currency" jdbcType="VARCHAR" />
+    <result column="LastCFMCustomerTime" property="lastcfmcustomertime" jdbcType="TIMESTAMP" />
+    <result column="DeliveryTpe" property="deliverytpe" jdbcType="TINYINT" />
+    <result column="MotoID" property="motoid" jdbcType="INTEGER" />
+    <result column="FromIP" property="fromip" jdbcType="VARCHAR" />
+    <result column="StartDate" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="EndDate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="Remark" property="remark" jdbcType="NVARCHAR" />
+    <result column="ModifiedBy" property="modifiedby" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+    <result column="TotalDiscount" property="totaldiscount" jdbcType="DECIMAL" />
+    <result column="TotalServiceFee" property="totalservicefee" jdbcType="DECIMAL" />
+    <result column="TotalPenalty" property="totalpenalty" jdbcType="DECIMAL" />
+    <result column="StampDutyRate" property="stampdutyrate" jdbcType="DECIMAL" />
+    <result column="TakenBy" property="takenby" jdbcType="NVARCHAR" />
+    <result column="TakenDate" property="takendate" jdbcType="TIMESTAMP" />
+    <result column="MethodOfPaymentCode" property="methodofpaymentcode" jdbcType="INTEGER" />
+    <result column="PackageCode" property="packagecode" jdbcType="VARCHAR" />
+    <result column="DepartureCityID" property="departurecityid" jdbcType="INTEGER" />
+    <result column="ArrivalCityID" property="arrivalcityid" jdbcType="INTEGER" />
+    <result column="RefundedAmount" property="refundedamount" jdbcType="DECIMAL" />
+    <result column="ProductType" property="producttype" jdbcType="TINYINT" />
+    <result column="SubProdType" property="subprodtype" jdbcType="TINYINT" />
+    <result column="OperationType" property="operationtype" jdbcType="TINYINT" />
+    <result column="PromoDiscount" property="promodiscount" jdbcType="DECIMAL" />
+    <result column="PromoCode" property="promocode" jdbcType="NVARCHAR" />
+    <result column="IsDraft" property="isdraft" jdbcType="BIT" />
+    <result column="OutFlightNo" property="outflightno" jdbcType="NVARCHAR" />
+    <result column="InFlightNo" property="inflightno" jdbcType="NVARCHAR" />
+    <result column="PNR" property="pnr" jdbcType="NVARCHAR" />
+    <result column="IsReceipted" property="isreceipted" jdbcType="BIT" />
+    <result column="PreferentialType" property="preferentialtype" jdbcType="TINYINT" />
+    <result column="IsRealTimeConfirm" property="isrealtimeconfirm" jdbcType="BIT" />
+    <result column="OrderOtherFlagType" property="orderotherflagtype" jdbcType="BIGINT" />
+    <result column="AgentID" property="agentid" jdbcType="INTEGER" />
+    <result column="PromotionDiscount" property="promotiondiscount" jdbcType="DECIMAL" />
+    <result column="ClientID" property="clientid" jdbcType="NVARCHAR" />
+    <result column="RawOrderAmount" property="raworderamount" jdbcType="DECIMAL" />
+    <result column="IsDynamicProduct" property="isdynamicproduct" jdbcType="BIT" />
+    <result column="ResourceType" property="resourcetype" jdbcType="TINYINT" />
+    <result column="HoldAuthTime" property="holdauthtime" jdbcType="TIMESTAMP" />
+    <result column="OrderAutoFlag" property="orderautoflag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PkgOrderNo, VerNo, OrderDate, SalesChannel, SalesOrg, CustMemberID, CustMemberName, 
+    PackageID, PackageName, OrderStatus, OrderBy, TotalAmount, ReceivedAmount, AdultQty, 
+    ChildQty, BabyQty, Currency, LastCFMCustomerTime, DeliveryTpe, MotoID, FromIP, StartDate, 
+    EndDate, Remark, ModifiedBy, ModifiedDate, TotalDiscount, TotalServiceFee, TotalPenalty, 
+    StampDutyRate, TakenBy, TakenDate, MethodOfPaymentCode, PackageCode, DepartureCityID, 
+    ArrivalCityID, RefundedAmount, ProductType, SubProdType, OperationType, PromoDiscount, 
+    PromoCode, IsDraft, OutFlightNo, InFlightNo, PNR, IsReceipted, PreferentialType, 
+    IsRealTimeConfirm, OrderOtherFlagType, AgentID, PromotionDiscount, ClientID, RawOrderAmount, 
+    IsDynamicProduct, ResourceType, HoldAuthTime, OrderAutoFlag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from Pkg_PkgOrderMaster
+    where PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Pkg_PkgOrderMaster
+    where PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.owen.model.PkgOrderMasterEntity" >
+    insert into Pkg_PkgOrderMaster (PkgOrderNo, VerNo, OrderDate, 
+      SalesChannel, SalesOrg, CustMemberID, 
+      CustMemberName, PackageID, PackageName, 
+      OrderStatus, OrderBy, TotalAmount, 
+      ReceivedAmount, AdultQty, ChildQty, 
+      BabyQty, Currency, LastCFMCustomerTime, 
+      DeliveryTpe, MotoID, FromIP, 
+      StartDate, EndDate, Remark, 
+      ModifiedBy, ModifiedDate, TotalDiscount, 
+      TotalServiceFee, TotalPenalty, StampDutyRate, 
+      TakenBy, TakenDate, MethodOfPaymentCode, 
+      PackageCode, DepartureCityID, ArrivalCityID, 
+      RefundedAmount, ProductType, SubProdType, 
+      OperationType, PromoDiscount, PromoCode, 
+      IsDraft, OutFlightNo, InFlightNo, 
+      PNR, IsReceipted, PreferentialType, 
+      IsRealTimeConfirm, OrderOtherFlagType, AgentID, 
+      PromotionDiscount, ClientID, RawOrderAmount, 
+      IsDynamicProduct, ResourceType, HoldAuthTime, 
+      OrderAutoFlag)
+    values (#{pkgorderno,jdbcType=VARCHAR}, #{verno,jdbcType=CHAR}, #{orderdate,jdbcType=TIMESTAMP}, 
+      #{saleschannel,jdbcType=TINYINT}, #{salesorg,jdbcType=INTEGER}, #{custmemberid,jdbcType=INTEGER}, 
+      #{custmembername,jdbcType=VARCHAR}, #{packageid,jdbcType=INTEGER}, #{packagename,jdbcType=NVARCHAR}, 
+      #{orderstatus,jdbcType=TINYINT}, #{orderby,jdbcType=VARCHAR}, #{totalamount,jdbcType=DECIMAL}, 
+      #{receivedamount,jdbcType=DECIMAL}, #{adultqty,jdbcType=INTEGER}, #{childqty,jdbcType=INTEGER}, 
+      #{babyqty,jdbcType=INTEGER}, #{currency,jdbcType=VARCHAR}, #{lastcfmcustomertime,jdbcType=TIMESTAMP}, 
+      #{deliverytpe,jdbcType=TINYINT}, #{motoid,jdbcType=INTEGER}, #{fromip,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, #{remark,jdbcType=NVARCHAR}, 
+      #{modifiedby,jdbcType=VARCHAR}, #{modifieddate,jdbcType=TIMESTAMP}, #{totaldiscount,jdbcType=DECIMAL}, 
+      #{totalservicefee,jdbcType=DECIMAL}, #{totalpenalty,jdbcType=DECIMAL}, #{stampdutyrate,jdbcType=DECIMAL}, 
+      #{takenby,jdbcType=NVARCHAR}, #{takendate,jdbcType=TIMESTAMP}, #{methodofpaymentcode,jdbcType=INTEGER}, 
+      #{packagecode,jdbcType=VARCHAR}, #{departurecityid,jdbcType=INTEGER}, #{arrivalcityid,jdbcType=INTEGER}, 
+      #{refundedamount,jdbcType=DECIMAL}, #{producttype,jdbcType=TINYINT}, #{subprodtype,jdbcType=TINYINT}, 
+      #{operationtype,jdbcType=TINYINT}, #{promodiscount,jdbcType=DECIMAL}, #{promocode,jdbcType=NVARCHAR}, 
+      #{isdraft,jdbcType=BIT}, #{outflightno,jdbcType=NVARCHAR}, #{inflightno,jdbcType=NVARCHAR}, 
+      #{pnr,jdbcType=NVARCHAR}, #{isreceipted,jdbcType=BIT}, #{preferentialtype,jdbcType=TINYINT}, 
+      #{isrealtimeconfirm,jdbcType=BIT}, #{orderotherflagtype,jdbcType=BIGINT}, #{agentid,jdbcType=INTEGER}, 
+      #{promotiondiscount,jdbcType=DECIMAL}, #{clientid,jdbcType=NVARCHAR}, #{raworderamount,jdbcType=DECIMAL}, 
+      #{isdynamicproduct,jdbcType=BIT}, #{resourcetype,jdbcType=TINYINT}, #{holdauthtime,jdbcType=TIMESTAMP}, 
+      #{orderautoflag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.owen.model.PkgOrderMasterEntity" >
+    insert into Pkg_PkgOrderMaster
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkgorderno != null" >
+        PkgOrderNo,
+      </if>
+      <if test="verno != null" >
+        VerNo,
+      </if>
+      <if test="orderdate != null" >
+        OrderDate,
+      </if>
+      <if test="saleschannel != null" >
+        SalesChannel,
+      </if>
+      <if test="salesorg != null" >
+        SalesOrg,
+      </if>
+      <if test="custmemberid != null" >
+        CustMemberID,
+      </if>
+      <if test="custmembername != null" >
+        CustMemberName,
+      </if>
+      <if test="packageid != null" >
+        PackageID,
+      </if>
+      <if test="packagename != null" >
+        PackageName,
+      </if>
+      <if test="orderstatus != null" >
+        OrderStatus,
+      </if>
+      <if test="orderby != null" >
+        OrderBy,
+      </if>
+      <if test="totalamount != null" >
+        TotalAmount,
+      </if>
+      <if test="receivedamount != null" >
+        ReceivedAmount,
+      </if>
+      <if test="adultqty != null" >
+        AdultQty,
+      </if>
+      <if test="childqty != null" >
+        ChildQty,
+      </if>
+      <if test="babyqty != null" >
+        BabyQty,
+      </if>
+      <if test="currency != null" >
+        Currency,
+      </if>
+      <if test="lastcfmcustomertime != null" >
+        LastCFMCustomerTime,
+      </if>
+      <if test="deliverytpe != null" >
+        DeliveryTpe,
+      </if>
+      <if test="motoid != null" >
+        MotoID,
+      </if>
+      <if test="fromip != null" >
+        FromIP,
+      </if>
+      <if test="startdate != null" >
+        StartDate,
+      </if>
+      <if test="enddate != null" >
+        EndDate,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="modifiedby != null" >
+        ModifiedBy,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+      <if test="totaldiscount != null" >
+        TotalDiscount,
+      </if>
+      <if test="totalservicefee != null" >
+        TotalServiceFee,
+      </if>
+      <if test="totalpenalty != null" >
+        TotalPenalty,
+      </if>
+      <if test="stampdutyrate != null" >
+        StampDutyRate,
+      </if>
+      <if test="takenby != null" >
+        TakenBy,
+      </if>
+      <if test="takendate != null" >
+        TakenDate,
+      </if>
+      <if test="methodofpaymentcode != null" >
+        MethodOfPaymentCode,
+      </if>
+      <if test="packagecode != null" >
+        PackageCode,
+      </if>
+      <if test="departurecityid != null" >
+        DepartureCityID,
+      </if>
+      <if test="arrivalcityid != null" >
+        ArrivalCityID,
+      </if>
+      <if test="refundedamount != null" >
+        RefundedAmount,
+      </if>
+      <if test="producttype != null" >
+        ProductType,
+      </if>
+      <if test="subprodtype != null" >
+        SubProdType,
+      </if>
+      <if test="operationtype != null" >
+        OperationType,
+      </if>
+      <if test="promodiscount != null" >
+        PromoDiscount,
+      </if>
+      <if test="promocode != null" >
+        PromoCode,
+      </if>
+      <if test="isdraft != null" >
+        IsDraft,
+      </if>
+      <if test="outflightno != null" >
+        OutFlightNo,
+      </if>
+      <if test="inflightno != null" >
+        InFlightNo,
+      </if>
+      <if test="pnr != null" >
+        PNR,
+      </if>
+      <if test="isreceipted != null" >
+        IsReceipted,
+      </if>
+      <if test="preferentialtype != null" >
+        PreferentialType,
+      </if>
+      <if test="isrealtimeconfirm != null" >
+        IsRealTimeConfirm,
+      </if>
+      <if test="orderotherflagtype != null" >
+        OrderOtherFlagType,
+      </if>
+      <if test="agentid != null" >
+        AgentID,
+      </if>
+      <if test="promotiondiscount != null" >
+        PromotionDiscount,
+      </if>
+      <if test="clientid != null" >
+        ClientID,
+      </if>
+      <if test="raworderamount != null" >
+        RawOrderAmount,
+      </if>
+      <if test="isdynamicproduct != null" >
+        IsDynamicProduct,
+      </if>
+      <if test="resourcetype != null" >
+        ResourceType,
+      </if>
+      <if test="holdauthtime != null" >
+        HoldAuthTime,
+      </if>
+      <if test="orderautoflag != null" >
+        OrderAutoFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkgorderno != null" >
+        #{pkgorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="verno != null" >
+        #{verno,jdbcType=CHAR},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleschannel != null" >
+        #{saleschannel,jdbcType=TINYINT},
+      </if>
+      <if test="salesorg != null" >
+        #{salesorg,jdbcType=INTEGER},
+      </if>
+      <if test="custmemberid != null" >
+        #{custmemberid,jdbcType=INTEGER},
+      </if>
+      <if test="custmembername != null" >
+        #{custmembername,jdbcType=VARCHAR},
+      </if>
+      <if test="packageid != null" >
+        #{packageid,jdbcType=INTEGER},
+      </if>
+      <if test="packagename != null" >
+        #{packagename,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="receivedamount != null" >
+        #{receivedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="adultqty != null" >
+        #{adultqty,jdbcType=INTEGER},
+      </if>
+      <if test="childqty != null" >
+        #{childqty,jdbcType=INTEGER},
+      </if>
+      <if test="babyqty != null" >
+        #{babyqty,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcfmcustomertime != null" >
+        #{lastcfmcustomertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytpe != null" >
+        #{deliverytpe,jdbcType=TINYINT},
+      </if>
+      <if test="motoid != null" >
+        #{motoid,jdbcType=INTEGER},
+      </if>
+      <if test="fromip != null" >
+        #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifiedby != null" >
+        #{modifiedby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totaldiscount != null" >
+        #{totaldiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalservicefee != null" >
+        #{totalservicefee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalpenalty != null" >
+        #{totalpenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="stampdutyrate != null" >
+        #{stampdutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="takenby != null" >
+        #{takenby,jdbcType=NVARCHAR},
+      </if>
+      <if test="takendate != null" >
+        #{takendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="methodofpaymentcode != null" >
+        #{methodofpaymentcode,jdbcType=INTEGER},
+      </if>
+      <if test="packagecode != null" >
+        #{packagecode,jdbcType=VARCHAR},
+      </if>
+      <if test="departurecityid != null" >
+        #{departurecityid,jdbcType=INTEGER},
+      </if>
+      <if test="arrivalcityid != null" >
+        #{arrivalcityid,jdbcType=INTEGER},
+      </if>
+      <if test="refundedamount != null" >
+        #{refundedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="producttype != null" >
+        #{producttype,jdbcType=TINYINT},
+      </if>
+      <if test="subprodtype != null" >
+        #{subprodtype,jdbcType=TINYINT},
+      </if>
+      <if test="operationtype != null" >
+        #{operationtype,jdbcType=TINYINT},
+      </if>
+      <if test="promodiscount != null" >
+        #{promodiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="promocode != null" >
+        #{promocode,jdbcType=NVARCHAR},
+      </if>
+      <if test="isdraft != null" >
+        #{isdraft,jdbcType=BIT},
+      </if>
+      <if test="outflightno != null" >
+        #{outflightno,jdbcType=NVARCHAR},
+      </if>
+      <if test="inflightno != null" >
+        #{inflightno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pnr != null" >
+        #{pnr,jdbcType=NVARCHAR},
+      </if>
+      <if test="isreceipted != null" >
+        #{isreceipted,jdbcType=BIT},
+      </if>
+      <if test="preferentialtype != null" >
+        #{preferentialtype,jdbcType=TINYINT},
+      </if>
+      <if test="isrealtimeconfirm != null" >
+        #{isrealtimeconfirm,jdbcType=BIT},
+      </if>
+      <if test="orderotherflagtype != null" >
+        #{orderotherflagtype,jdbcType=BIGINT},
+      </if>
+      <if test="agentid != null" >
+        #{agentid,jdbcType=INTEGER},
+      </if>
+      <if test="promotiondiscount != null" >
+        #{promotiondiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=NVARCHAR},
+      </if>
+      <if test="raworderamount != null" >
+        #{raworderamount,jdbcType=DECIMAL},
+      </if>
+      <if test="isdynamicproduct != null" >
+        #{isdynamicproduct,jdbcType=BIT},
+      </if>
+      <if test="resourcetype != null" >
+        #{resourcetype,jdbcType=TINYINT},
+      </if>
+      <if test="holdauthtime != null" >
+        #{holdauthtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderautoflag != null" >
+        #{orderautoflag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.owen.model.PkgOrderMasterEntity" >
+    update Pkg_PkgOrderMaster
+    <set >
+      <if test="verno != null" >
+        VerNo = #{verno,jdbcType=CHAR},
+      </if>
+      <if test="orderdate != null" >
+        OrderDate = #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleschannel != null" >
+        SalesChannel = #{saleschannel,jdbcType=TINYINT},
+      </if>
+      <if test="salesorg != null" >
+        SalesOrg = #{salesorg,jdbcType=INTEGER},
+      </if>
+      <if test="custmemberid != null" >
+        CustMemberID = #{custmemberid,jdbcType=INTEGER},
+      </if>
+      <if test="custmembername != null" >
+        CustMemberName = #{custmembername,jdbcType=VARCHAR},
+      </if>
+      <if test="packageid != null" >
+        PackageID = #{packageid,jdbcType=INTEGER},
+      </if>
+      <if test="packagename != null" >
+        PackageName = #{packagename,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        OrderStatus = #{orderstatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderby != null" >
+        OrderBy = #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="totalamount != null" >
+        TotalAmount = #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="receivedamount != null" >
+        ReceivedAmount = #{receivedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="adultqty != null" >
+        AdultQty = #{adultqty,jdbcType=INTEGER},
+      </if>
+      <if test="childqty != null" >
+        ChildQty = #{childqty,jdbcType=INTEGER},
+      </if>
+      <if test="babyqty != null" >
+        BabyQty = #{babyqty,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        Currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcfmcustomertime != null" >
+        LastCFMCustomerTime = #{lastcfmcustomertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytpe != null" >
+        DeliveryTpe = #{deliverytpe,jdbcType=TINYINT},
+      </if>
+      <if test="motoid != null" >
+        MotoID = #{motoid,jdbcType=INTEGER},
+      </if>
+      <if test="fromip != null" >
+        FromIP = #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        StartDate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        EndDate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifiedby != null" >
+        ModifiedBy = #{modifiedby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totaldiscount != null" >
+        TotalDiscount = #{totaldiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalservicefee != null" >
+        TotalServiceFee = #{totalservicefee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalpenalty != null" >
+        TotalPenalty = #{totalpenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="stampdutyrate != null" >
+        StampDutyRate = #{stampdutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="takenby != null" >
+        TakenBy = #{takenby,jdbcType=NVARCHAR},
+      </if>
+      <if test="takendate != null" >
+        TakenDate = #{takendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="methodofpaymentcode != null" >
+        MethodOfPaymentCode = #{methodofpaymentcode,jdbcType=INTEGER},
+      </if>
+      <if test="packagecode != null" >
+        PackageCode = #{packagecode,jdbcType=VARCHAR},
+      </if>
+      <if test="departurecityid != null" >
+        DepartureCityID = #{departurecityid,jdbcType=INTEGER},
+      </if>
+      <if test="arrivalcityid != null" >
+        ArrivalCityID = #{arrivalcityid,jdbcType=INTEGER},
+      </if>
+      <if test="refundedamount != null" >
+        RefundedAmount = #{refundedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="producttype != null" >
+        ProductType = #{producttype,jdbcType=TINYINT},
+      </if>
+      <if test="subprodtype != null" >
+        SubProdType = #{subprodtype,jdbcType=TINYINT},
+      </if>
+      <if test="operationtype != null" >
+        OperationType = #{operationtype,jdbcType=TINYINT},
+      </if>
+      <if test="promodiscount != null" >
+        PromoDiscount = #{promodiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="promocode != null" >
+        PromoCode = #{promocode,jdbcType=NVARCHAR},
+      </if>
+      <if test="isdraft != null" >
+        IsDraft = #{isdraft,jdbcType=BIT},
+      </if>
+      <if test="outflightno != null" >
+        OutFlightNo = #{outflightno,jdbcType=NVARCHAR},
+      </if>
+      <if test="inflightno != null" >
+        InFlightNo = #{inflightno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pnr != null" >
+        PNR = #{pnr,jdbcType=NVARCHAR},
+      </if>
+      <if test="isreceipted != null" >
+        IsReceipted = #{isreceipted,jdbcType=BIT},
+      </if>
+      <if test="preferentialtype != null" >
+        PreferentialType = #{preferentialtype,jdbcType=TINYINT},
+      </if>
+      <if test="isrealtimeconfirm != null" >
+        IsRealTimeConfirm = #{isrealtimeconfirm,jdbcType=BIT},
+      </if>
+      <if test="orderotherflagtype != null" >
+        OrderOtherFlagType = #{orderotherflagtype,jdbcType=BIGINT},
+      </if>
+      <if test="agentid != null" >
+        AgentID = #{agentid,jdbcType=INTEGER},
+      </if>
+      <if test="promotiondiscount != null" >
+        PromotionDiscount = #{promotiondiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="clientid != null" >
+        ClientID = #{clientid,jdbcType=NVARCHAR},
+      </if>
+      <if test="raworderamount != null" >
+        RawOrderAmount = #{raworderamount,jdbcType=DECIMAL},
+      </if>
+      <if test="isdynamicproduct != null" >
+        IsDynamicProduct = #{isdynamicproduct,jdbcType=BIT},
+      </if>
+      <if test="resourcetype != null" >
+        ResourceType = #{resourcetype,jdbcType=TINYINT},
+      </if>
+      <if test="holdauthtime != null" >
+        HoldAuthTime = #{holdauthtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderautoflag != null" >
+        OrderAutoFlag = #{orderautoflag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.owen.model.PkgOrderMasterEntity" >
+    update Pkg_PkgOrderMaster
+    set VerNo = #{verno,jdbcType=CHAR},
+      OrderDate = #{orderdate,jdbcType=TIMESTAMP},
+      SalesChannel = #{saleschannel,jdbcType=TINYINT},
+      SalesOrg = #{salesorg,jdbcType=INTEGER},
+      CustMemberID = #{custmemberid,jdbcType=INTEGER},
+      CustMemberName = #{custmembername,jdbcType=VARCHAR},
+      PackageID = #{packageid,jdbcType=INTEGER},
+      PackageName = #{packagename,jdbcType=NVARCHAR},
+      OrderStatus = #{orderstatus,jdbcType=TINYINT},
+      OrderBy = #{orderby,jdbcType=VARCHAR},
+      TotalAmount = #{totalamount,jdbcType=DECIMAL},
+      ReceivedAmount = #{receivedamount,jdbcType=DECIMAL},
+      AdultQty = #{adultqty,jdbcType=INTEGER},
+      ChildQty = #{childqty,jdbcType=INTEGER},
+      BabyQty = #{babyqty,jdbcType=INTEGER},
+      Currency = #{currency,jdbcType=VARCHAR},
+      LastCFMCustomerTime = #{lastcfmcustomertime,jdbcType=TIMESTAMP},
+      DeliveryTpe = #{deliverytpe,jdbcType=TINYINT},
+      MotoID = #{motoid,jdbcType=INTEGER},
+      FromIP = #{fromip,jdbcType=VARCHAR},
+      StartDate = #{startdate,jdbcType=TIMESTAMP},
+      EndDate = #{enddate,jdbcType=TIMESTAMP},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      ModifiedBy = #{modifiedby,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      TotalDiscount = #{totaldiscount,jdbcType=DECIMAL},
+      TotalServiceFee = #{totalservicefee,jdbcType=DECIMAL},
+      TotalPenalty = #{totalpenalty,jdbcType=DECIMAL},
+      StampDutyRate = #{stampdutyrate,jdbcType=DECIMAL},
+      TakenBy = #{takenby,jdbcType=NVARCHAR},
+      TakenDate = #{takendate,jdbcType=TIMESTAMP},
+      MethodOfPaymentCode = #{methodofpaymentcode,jdbcType=INTEGER},
+      PackageCode = #{packagecode,jdbcType=VARCHAR},
+      DepartureCityID = #{departurecityid,jdbcType=INTEGER},
+      ArrivalCityID = #{arrivalcityid,jdbcType=INTEGER},
+      RefundedAmount = #{refundedamount,jdbcType=DECIMAL},
+      ProductType = #{producttype,jdbcType=TINYINT},
+      SubProdType = #{subprodtype,jdbcType=TINYINT},
+      OperationType = #{operationtype,jdbcType=TINYINT},
+      PromoDiscount = #{promodiscount,jdbcType=DECIMAL},
+      PromoCode = #{promocode,jdbcType=NVARCHAR},
+      IsDraft = #{isdraft,jdbcType=BIT},
+      OutFlightNo = #{outflightno,jdbcType=NVARCHAR},
+      InFlightNo = #{inflightno,jdbcType=NVARCHAR},
+      PNR = #{pnr,jdbcType=NVARCHAR},
+      IsReceipted = #{isreceipted,jdbcType=BIT},
+      PreferentialType = #{preferentialtype,jdbcType=TINYINT},
+      IsRealTimeConfirm = #{isrealtimeconfirm,jdbcType=BIT},
+      OrderOtherFlagType = #{orderotherflagtype,jdbcType=BIGINT},
+      AgentID = #{agentid,jdbcType=INTEGER},
+      PromotionDiscount = #{promotiondiscount,jdbcType=DECIMAL},
+      ClientID = #{clientid,jdbcType=NVARCHAR},
+      RawOrderAmount = #{raworderamount,jdbcType=DECIMAL},
+      IsDynamicProduct = #{isdynamicproduct,jdbcType=BIT},
+      ResourceType = #{resourcetype,jdbcType=TINYINT},
+      HoldAuthTime = #{holdauthtime,jdbcType=TIMESTAMP},
+      OrderAutoFlag = #{orderautoflag,jdbcType=INTEGER}
+    where PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR}
+  </update>
+</mapper>
