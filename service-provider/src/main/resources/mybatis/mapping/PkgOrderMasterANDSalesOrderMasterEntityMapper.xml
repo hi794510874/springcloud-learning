@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.owen.mapper.PkgOrderMasterANDSalesOrderMasterEntityMapper">
+    <resultMap id="BaseResultMap" type="com.owen.model.PkgOrderMasterANDSalesOrderMasterEntity">
+        <result column="PkgOrderNo" property="pkgorderno" jdbcType="VARCHAR"/>
+        <result column="PackageID" property="packageid" jdbcType="INTEGER"/>
+        <result column="SalesOrderNo" property="salesorderno" jdbcType="INTEGER"/>
+        <result column="FromIP" property="fromip" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    p.PkgOrderNo,p.PackageID,s.SalesOrderNo,s.FromIP
+    </sql>
+    <select id="selectByPkgOrderNo" resultType="com.owen.model.PkgOrderMasterANDSalesOrderMasterEntity" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from Pkg_PkgOrderMaster p
+        JOIN Pkg_SalesOrderMaster s
+        ON p.PkgOrderNo = s.PkgOrderNo
+        where p.PkgOrderNo = #{pkgorderno,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
