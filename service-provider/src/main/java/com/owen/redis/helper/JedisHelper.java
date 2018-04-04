@@ -108,6 +108,8 @@ public class JedisHelper {
     public long increate(String key, String filed, int step) {
         key = generyKey(key);
         long t = jedisCluster.hincrBy(key, filed, step);
+        jedisCluster.expire(key, 60);
+
         return t;
     }
 

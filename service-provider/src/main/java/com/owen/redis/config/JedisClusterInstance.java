@@ -1,5 +1,6 @@
 package com.owen.redis.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.HostAndPort;
@@ -13,12 +14,20 @@ import java.util.HashSet;
 @Configuration
 public class JedisClusterInstance {
 
+    @Value("${spring.redis.cluster.nodes}")
+    private String redisClusterConnectionStr;
 
     @Bean
     public JedisCluster CreateJedisClusterInstance() {
+
+        String s = redisClusterConnectionStr;
+        String[] hostAndP = s.split(",");
         HashSet<HostAndPort> set = new HashSet<>();
-        HostAndPort hostAndPort = new HostAndPort("172.18.21.167", 8003);
-        set.add(hostAndPort);
+        for (int i = 0; i < hostAndP.length; i++) {
+            String[] hp = hostAndP[i].split(":");
+            HostAndPort hostAndPort = new HostAndPort(hp[0], Integer.parseInt(hp[1]));
+            set.add(hostAndPort);
+        }
         JedisCluster adapter = new JedisCluster(set);
 
         return adapter;
