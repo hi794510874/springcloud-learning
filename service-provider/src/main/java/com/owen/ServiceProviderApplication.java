@@ -32,7 +32,7 @@ public class ServiceProviderApplication {
         // 2.添加fastjson的配置信息，比如：是否格式化返回的json数据
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat); // 3.在conver中添加配置信息
-        fastJsonConfig.setDateFormat("yyy-MM-dd'T'HH:mm:ss.sssX");
+        fastJsonConfig.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.sssX");
         fastConverter.setFastJsonConfig(fastJsonConfig);
         HttpMessageConverter<?> converter = fastConverter; // 4.将vonver添加到converters当中
         return new HttpMessageConverters(converter);

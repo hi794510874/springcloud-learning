@@ -1,5 +1,7 @@
 package com.owen.redis.config;
 
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +26,6 @@ import java.util.List;
 /**
  * Created by huang_b on 2017/12/5.
  * 这个只是将 spring 的缓存 搞到了 redis 里面去了
- *
  */
 @Configuration
 public class RedisCacheConfig extends CachingConfigurerSupport {
@@ -33,24 +34,23 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     private RedisTemplate redisTemplate;
 
     /*
-    * 将redistemplate 的 key 序列化换成 string  value序列化换成 jackson
+    * 将redistemplate 的 key 序列化换成 string  value序列化换成 fastjson
     * */
     @Bean
     public RedisTemplate getRedisTemplate() {
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
+        FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.sssX");
+        fastJsonRedisSerializer.setFastJsonConfig(fastJsonConfig);
 
         //设置序列化Key的实例化对象
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         //设置序列化Value的实例化对象
-        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setValueSerializer(fastJsonRedisSerializer);
 
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 
-        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
 
 //        redisTemplate.getConnectionFactory().getClusterConnection().setConfig();
         return redisTemplate;

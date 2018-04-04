@@ -17,7 +17,7 @@ public class JedisClusterInstance {
     @Bean
     public JedisCluster CreateJedisClusterInstance() {
         HashSet<HostAndPort> set = new HashSet<>();
-        HostAndPort hostAndPort = new HostAndPort("192.168.119.128", 7000);
+        HostAndPort hostAndPort = new HostAndPort("172.18.21.167", 8003);
         set.add(hostAndPort);
         JedisCluster adapter = new JedisCluster(set);
 
