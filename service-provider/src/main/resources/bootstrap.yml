@@ -32,10 +32,13 @@ spring:
       name:  service-provider
     cloud:
       config:
-        uri: http://localhost:8001/       # 配置spring cloud config服务端的url
+#        uri: http://localhost:8001/       # 配置spring cloud config服务端的url
         profile: dev                    # 指定profile
         label: master                         # 指定gitlab仓库的分支
-        name: application,rmq,jdbc,redis             # application-dev.yml rmq-dev.yml
+        name: application,rmq,jdbc,redis   # application-dev.yml rmq-dev.yml
+        discovery:
+          enabled: true
+          service-id: CONFIG-SERVER
 #    rabbitmq:
 #      host: 172.18.21.189
 #      port: 5672
