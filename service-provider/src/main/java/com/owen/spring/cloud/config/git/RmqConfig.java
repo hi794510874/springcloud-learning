@@ -1,4 +1,4 @@
-package com.owen.rabbitmqUtil;
+package com.owen.spring.cloud.config.git;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -15,31 +15,42 @@ import java.util.Properties;
 @RefreshScope
 public class RmqConfig {
 
-    @Value("${rabbitmq.host}")
+    @Value("${spring.rabbitmq.host}")
     private String rmqHost;
 
     public String getrmqHost() {
         return rmqHost;
     }
 
-    @Value("${rabbitmq.port}")
+    @Value("${spring.rabbitmq.port}")
     private String rmqProt;
 
     public String getRmqProt() {
         return rmqProt;
     }
-    @Value("${rabbitmq.username}")
+
+    @Value("${spring.rabbitmq.username}")
     private String rmqUserName;
 
     public String getRmqUserName() {
         return rmqUserName;
     }
-    @Value("${rabbitmq.password}")
+
+    @Value("${spring.rabbitmq.password}")
     private String rmqPassword;
 
     public String getRmqPassword() {
         return rmqPassword;
     }
 
+    public String getEnv() {
+        return env;
+    }
 
+    @Value("${spring.rabbitmq.env}")
+    private String env;
+
+    public String getRmqHost() {
+        return rmqHost;
+    }
 }

@@ -35,15 +35,15 @@ spring:
         uri: http://localhost:8001/       # 配置spring cloud config服务端的url
         profile: dev                    # 指定profile
         label: master                         # 指定gitlab仓库的分支
-        name: application,rmq,jdbc             # application-dev.yml rmq-dev.yml
-    rabbitmq:
-      host: 172.18.21.189
-      port: 5672
-      username: admin
-      password: admin
-    redis:
-      cluster:
-        nodes: 172.18.21.167:8001,172.18.21.167:8002,172.18.21.167:8003,172.18.21.168:8004,172.18.21.168:8005,172.18.21.168:8006
+        name: application,rmq,jdbc,redis             # application-dev.yml rmq-dev.yml
+#    rabbitmq:
+#      host: 172.18.21.189
+#      port: 5672
+#      username: admin
+#      password: admin
+#    redis:
+#      cluster:
+#        nodes: 172.18.21.167:8001,172.18.21.167:8002,172.18.21.167:8003,172.18.21.168:8004,172.18.21.168:8005,172.18.21.168:8006
 
 management:
   security:

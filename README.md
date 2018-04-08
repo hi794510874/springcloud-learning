@@ -2,7 +2,7 @@
 
 
 * [config-server](#config-server)
-    *  基于git、rmq,实现了提交配置文件的修改， client能及时获取到最新配置
+    *  基于git、rmq,实现了提交配置文件的修改， client能及时获取到最新配置,service-provider中利用spring-profile 来构建多环境配置 java -jar service-provider-0.0.1-SNAPSHOT-exec.jar –spring.profiles.active=test
     
     
 * [service-provider](#service-provider)
@@ -47,13 +47,13 @@
 	    </pre>
     
 * [mybatis](#mybatis)
-    * 使用starter，好像不支持动态sql，持续关注.....  
+    * 使用mybatis-generator自动生成mapper和model,重复执行一个表的时候xml会在已有文件里面追加，每次修改gennerator的配置文件的时候要格外注意 mvn mybatis-generator:generate  ，因为要写sql语句，所以和数据库紧耦合
     
 * [spring-retry](#spring-retry)
     * 在service-consumer-ribbon里面有加入,测试调用service-provider失败后的场景
     
 * [redis](#redis)
-    * 待续.......
+    * 使用jedis操作redis集群
         
 * [kafka](#kafka)
     * 待续.......

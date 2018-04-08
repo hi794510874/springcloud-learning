@@ -1,5 +1,6 @@
 package com.owen.rabbitmqUtil;
 
+import com.owen.spring.cloud.config.git.RmqConfig;
 import com.rabbitmq.client.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

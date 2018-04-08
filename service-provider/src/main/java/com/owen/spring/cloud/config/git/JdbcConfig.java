@@ -18,4 +18,10 @@ public class JdbcConfig {
     public String getSpringDataSourceUrl() {
         return springDataSourceUrl;
     }
+    @Value("${spring-datasource-env}")
+    private  String env;
+
+    public String getEnv() {
+        return env;
+    }
 }

@@ -1,9 +1,7 @@
 package com.owen.redis.helper;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.owen.compress.Lz4Helper;
-import com.owen.model.PkgSalesOrderMasterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisCluster;

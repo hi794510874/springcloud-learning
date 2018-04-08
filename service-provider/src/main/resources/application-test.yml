@@ -1,0 +1,7 @@
+spring:
+    cloud:
+      config:
+        profile: test                    # 指定profile   java -jar service-provider-0.0.1-SNAPSHOT-exec.jar –spring.profiles.active=test
+
+
+
