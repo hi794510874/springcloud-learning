@@ -2,7 +2,7 @@
 
 
 * [config-server](#config-server)
-    *  基于git、rmq,实现了提交配置文件的修改， client能及时获取到最新配置,service-provider中利用spring-profile 来构建多环境配置 java -jar service-provider-0.0.1-SNAPSHOT-exec.jar –spring.profiles.active=test
+    *  基于git、rmq,实现了提交配置文件的修改， client能及时获取到最新配置,service-provider中利用spring-profile 来构建多环境配置 java -jar service-provider-0.0.1-SNAPSHOT-exec.jar –spring.profiles.active=test 多实例注册到eureka，高可用，调用方写服务名即可
     
     
 * [service-provider](#service-provider)
