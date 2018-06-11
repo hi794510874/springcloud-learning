@@ -15,6 +15,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 @SpringBootApplication
 @EnableFeignClients
 public class ServiceConsumerFeignApplication {
+/*    */
+
     /**
      * 在这里我们使用@Bean注入fastJsonHttpMessageConverters * @return
      */
@@ -30,6 +32,7 @@ public class ServiceConsumerFeignApplication {
         HttpMessageConverter<?> converter = fastConverter; // 4.将vonver添加到converters当中
         return new HttpMessageConverters(converter);
     }
+
     public static void main(String[] args) {
         SpringApplication.run(ServiceConsumerFeignApplication.class, args);
     }

@@ -33,17 +33,17 @@ spring:
     cloud:
       config:
 #        uri: http://localhost:8001/       # 配置spring cloud config服务端的url
-        profile: dev                    # 指定profile
+        profile: dev                    # 指定profile   拿到配置项的值 会缓存到客户端 默认5mins
         label: master                         # 指定gitlab仓库的分支
-        name: application,rmq,jdbc,redis   # application-dev.yml rmq-dev.yml
+        name: application,rmq,jdbc,redis   # application-dev.yml rmq-dev.yml  ${spring.profiles.active}
         discovery:
           enabled: true
           service-id: CONFIG-SERVER
-#    rabbitmq:
-#      host: 172.18.21.189
-#      port: 5672
-#      username: admin
-#      password: admin
+    rabbitmq:
+      host: 172.18.21.189
+      port: 5672
+      username: admin
+      password: admin
 #    redis:
 #      cluster:
 #        nodes: 172.18.21.167:8001,172.18.21.167:8002,172.18.21.167:8003,172.18.21.168:8004,172.18.21.168:8005,172.18.21.168:8006
@@ -57,5 +57,9 @@ mybatis.type-aliases-package: com.owen.model
 mybatis:
   mapper-locations: classpath:mybatis/mapping/*.xml
 #spring.boot.admin.url: http://localhost:8769
+
+apollo.bootstrap.enabled: true
+apollo.bootstrap.namespaces: application,pbssetting
+
 
 

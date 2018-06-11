@@ -6,11 +6,15 @@ import com.owen.mapper.PkgSalesOrderMasterEntityMapper;
 import com.owen.model.*;
 import com.owen.rabbitmqUtil.RmqHelper;
 import com.owen.redis.helper.JedisHelper;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -22,6 +26,8 @@ import java.util.concurrent.TimeoutException;
 @RequestMapping("/order")
 @RestController
 public class SaleOrderMasterController {
+    Logger logger = Logger.getLogger(SaleOrderMasterController.class);
+
     @Autowired
     private PkgSalesOrderMasterEntityMapper salesOrderMasterEntityMapper;
 
@@ -70,7 +76,9 @@ public class SaleOrderMasterController {
 
         this.tracer.addTag("request", JacksonUtils.toJson(pkgorderno));
         this.tracer.addTag("response", JacksonUtils.toJson(commonRS));
-
+        //long traceId = tracer.getCurrentSpan().getTraceId();
+        String traceId = tracer.getCurrentSpan().traceIdString();
+        logger.debug("traceid" + traceId);
         return commonRS;
     }
 

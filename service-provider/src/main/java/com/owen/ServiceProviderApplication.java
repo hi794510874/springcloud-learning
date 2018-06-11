@@ -22,7 +22,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 @ServletComponentScan   //扫描Servlet  druid 监控界面
 @EnableCaching
 public class ServiceProviderApplication {
-    /**
+   /* *//**
      * 在这里我们使用@Bean注入fastJsonHttpMessageConverters * @return
      */
     @Bean

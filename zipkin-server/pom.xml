@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Dalston.SR4</spring-cloud.version>
+        <spring-cloud.version>Dalston.SR5</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -53,17 +53,24 @@
             <scope>runtime</scope>
         </dependency>
 
-   <!--     &lt;!&ndash; https://mvnrepository.com/artifact/io.zipkin.java/zipkin &ndash;&gt;
-        <dependency>
-            <groupId>io.zipkin.java</groupId>
-            <artifactId>zipkin</artifactId>
-            <version>2.3.1</version>
-        </dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>io.zipkin.java</groupId>-->
+            <!--<artifactId>zipkin</artifactId>-->
+            <!--<version>2.3.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>io.zipkin.java</groupId>
             <artifactId>zipkin-autoconfigure-storage-elasticsearch-http</artifactId>
-            <version>1.28.1</version>
+            <version>2.2.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
         </dependency>
     </dependencies>
 
