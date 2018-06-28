@@ -42,7 +42,7 @@
 * [日志处理](#日志处理)
     * zipkin会生成一个全局的traceid 写debug、errorlog的时候建议都带上traceid 到时好关联查找问题，用filebeat收集日志到es
     
-* [filebeat & logstash](#filebeat & logstash)
+* [filebeat-logstash](#filebeat-logstash)
     * filebeat & logstash 的实例配置我都有放一个在 service-provider resource文件夹下,可直接参考
     
     
