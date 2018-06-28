@@ -32,7 +32,7 @@
     * 使用jedis操作redis集群
         
 * [kafka](#kafka)
-    * 待续.......
+    * 调用kafkaClient 实现 消息发送和消费，consumer线程池处理不保证顺序消费,更多原理性东西参考:http://orchome.com/535
 
 	
 * [rabbitmp](#rabbitmp)

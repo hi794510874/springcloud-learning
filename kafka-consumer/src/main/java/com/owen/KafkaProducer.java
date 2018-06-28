@@ -26,12 +26,9 @@ public class KafkaProducer {
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         Producer<String, String> producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(props);
-        for (int i = 0; i < 10000; i++) {
-            CheckChangeMsg checkChangeMsg = new CheckChangeMsg();
-            checkChangeMsg.setContent("im content");
-            checkChangeMsg.setId(i);
+        for (int i = 0; i < 100; i++) {
 
-            Future<RecordMetadata> recordMetadataFuture = producer.send(new ProducerRecord<String, String>("test", Integer.toString(i), Integer.toString(i)), new Callback() {
+            Future<RecordMetadata> recordMetadataFuture = producer.send(new ProducerRecord<String, String>("test", Integer.toString(i), "{\"TraceId\":\"40439010-f259-4990-8bf8-459fc676584f\",\"CatKey\":{\"MemberId\":0,\"MotoGuid\":\"\",\"OrderId\":\"\"},\"LevelID\":1}"), new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception e) {
                     if (e != null) {

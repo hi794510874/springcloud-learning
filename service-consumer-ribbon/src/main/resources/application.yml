@@ -44,4 +44,16 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 7000  
 
 
 
+#output.logstash:
+#  # The Logstash hosts
+#  #hosts: ["localhost:5044", "localhost:5045"]
+#  hosts: ["localhost:5045"]
+#  compression_level: 6
+#  #compression: lz4
+#  loadbalance: true
+#  #bulk_max_size : 8192
+#  #workers: 4
+
+
+
 
