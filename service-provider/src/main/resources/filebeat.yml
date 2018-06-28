@@ -1,0 +1,64 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - d:\logs\package\*.log
+  #ignore_older: 5m
+  max_bytes: 20971520
+  scan_frequency: 10s
+  fields:
+    log_topic: debug
+
+
+- input_type: log
+  paths:
+    - d:\logs\flight\*.log
+  #ignore_older: 5m
+  max_bytes: 20971520
+  scan_frequency: 10s
+  fields:
+    log_topic: test
+
+queue.mem:
+  events: 4096
+  flush.min_events: 512
+  flush.timeout: 5s
+
+#filebeat.spool_size: 1024
+#----------------------------- Logstash output --------------------------------
+#output.logstash:
+#  # The Logstash hosts
+#  #hosts: ["localhost:5044", "localhost:5045"]
+#  hosts: ["localhost:5045"]
+#  compression_level: 6
+#  #compression: lz4
+#  loadbalance: true
+#  #bulk_max_size : 8192
+#  #workers: 4
+
+
+output.kafka:
+  # initial brokers for reading cluster metadata
+  hosts: ["192.168.119.128:9092"]
+
+  # message topic selection + partitioning
+  topic: '%{[fields.log_topic]}'
+  partition.round_robin:
+    reachable_only: false
+#消息写入leader后就 返回响应  -1则是  消息写入所有的副本后响应最强保障
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+
+
+
+
+#output.console:
+#  pretty: false
+
+#output.file:
+#  path: "d:\\logs\\flight"
+#  filename: filebeat
+
+logging.level: debug
+logging.selectors: [ beat,service,publish ]
+files.rotateeverybytes: 20971520

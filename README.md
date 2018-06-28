@@ -19,7 +19,7 @@
     * 向eureka-server中注册,并且监控service-provider、service-consumer和config-server。tip: spring-boot-admin会从eureka中获取各个应用的信息
     
 * [zipk-server](#zipk-server)
-    * 记录各服务之间的链路数据，添加自定义数据 tracer.addTag(key,val) ，数据保存到es 6.2.2，zipkin-ui中自定义查询语法还不清楚。。。。，
+    * 记录各服务之间的链路数据，添加自定义数据 tracer.addTag(key,val) ，数据保存到es 6.2.2，可用kibana进行聚合展示
     
     
 * [mybatis](#mybatis)
@@ -41,6 +41,9 @@
     	
 * [日志处理](#日志处理)
     * zipkin会生成一个全局的traceid 写debug、errorlog的时候建议都带上traceid 到时好关联查找问题，用filebeat收集日志到es
+    
+* [filebeat & logstash](#filebeat & logstash)
+    * filebeat & logstash 的实例配置我都有放一个在 service-provider resource文件夹下,可直接参考
     
     
     
