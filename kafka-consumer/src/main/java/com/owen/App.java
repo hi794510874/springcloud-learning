@@ -44,8 +44,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class App {
     public static void main(String[] args) {
-        int threadPoolSize = 10;
-        int blockQueueSize = 30;
+        int availProcessors = Runtime.getRuntime().availableProcessors();//获取可用的cpu数
+
+        int threadPoolSize = availProcessors*2;
+        int blockQueueSize = availProcessors*3;
         Properties propss = new Properties();
         propss.put("bootstrap.servers", "192.168.119.128:9092");
         propss.put("group.id", "test");
@@ -62,7 +64,7 @@ public class App {
         Map<String, List<PartitionInfo>> listMaps = kafkaConsumer.listTopics();
         kafkaConsumer.subscribe(Arrays.asList("test"));
         //https://blog.csdn.net/qq_25806863/article/details/71126867
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(3, threadPoolSize, 3, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(blockQueueSize));
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(availProcessors, threadPoolSize, 3, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(blockQueueSize));
 
         while (true) {
             int activeCount = executor.getActiveCount();
@@ -70,7 +72,7 @@ public class App {
             int queueSize = executor.getQueue().size();
             System.out.println("excuting task:" + activeCount + "   poolSize:" + threadPoolSizes + "   queueSize:" + queueSize + "  核心线程数:" + executor.getCorePoolSize());
 
-            while (blockQueueSize < queueSize + threadPoolSize) {
+            while (blockQueueSize <  queueSize + threadPoolSizes) {
                 queueSize = executor.getQueue().size();//当前队列的内容+线程池的线程 大于 定义的缓存队列数 则等待后面处理完
                 //System.out.println("    queueSize + threadPoolSize:" + (queueSize + threadPoolSize));
                 try {
@@ -93,7 +95,7 @@ public class App {
                             System.out.printf("offset = %d, value = %s, dateTime=%s", record.offset(), record.value(), dateTime);
                             System.out.println();
 
-                            HttpPost httpPost = new HttpPost("http://172.18.23.131:8089");
+                            HttpPost httpPost = new HttpPost("http://172.18.23.131:8089");//写到logstash
 
 
                             CloseableHttpClient client = HttpClients.createDefault();
