@@ -1,18 +1,23 @@
 package com.owen;
 
 import com.owen.model.CheckChangeMsg;
+import org.apache.commons.logging.Log;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.concurrent.Future;
+import java.util.logging.LogManager;
 
 /**
  * Created by huang_b on 2018/6/19.
  */
 public class KafkaProducer {
+    private static Logger logger= LoggerFactory.getLogger(KafkaProducer.class);
     public static void main(String[] args) throws InterruptedException {
         Properties props = new Properties();
         props.put("bootstrap.servers", "192.168.119.128:9092");
@@ -24,7 +29,12 @@ public class KafkaProducer {
         props.put("compression.type", "lz4");//gzip，snappy, 或 lz4
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("enable.idempotence", "true");// 开启写入消息时的幂等性  只针对单分区  单会话  针对多分区 要开启 事务
+        //props.put("transcational.id", "设置上面的开启幂等性，然后设置事务id 才能最终开启事务");//保证发送多分区消息 原子性
 
+
+
+        // 推荐使用单例 线程安全
         Producer<String, String> producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(props);
 
         for (int i = 0; i < 1000; i++) {
@@ -35,7 +45,8 @@ public class KafkaProducer {
                     if (e != null) {
                         e.printStackTrace();
                     }
-                    System.out.println("The offset of the record we just sent is: " + metadata.offset());
+
+                    logger.info("The offset of the record we just sent is: " + metadata.offset());
                 }
             });
         }

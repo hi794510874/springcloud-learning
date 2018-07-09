@@ -7,15 +7,14 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.kafka.clients.admin.RecordsToDelete;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -36,18 +35,21 @@ import java.util.concurrent.TimeUnit;
  * 在线程池的情况下 精细提交offset 异常 kafkaconsumer不允许多线程调用
  * https://blog.csdn.net/lmmzsn/article/details/78716824
  * <p>
- * 自动提交时如何执行的  下一次 poll 的时候会去提交,设置了auto.commit.interval.ms也是一样
+ * 自动提交时如何执行的  下一次 poll 的时候会去提交,设置了auto.commit.interval.ms也是一样  maybeAutoCommitOffsetsAsync
  * https://stackoverflow.com/questions/46546489/how-does-kafka-consumer-auto-commit-work
  * <p>
  * consumer配置参数
  * http://orchome.com/535
+ *
+ * consumer.close() 会通知broker 自己退出了   自动触发 rebalance
  */
 public class App {
+    private static Logger logger= LoggerFactory.getLogger(App.class);
     public static void main(String[] args) {
         int availProcessors = Runtime.getRuntime().availableProcessors();//获取可用的cpu数
-
-        int threadPoolSize = availProcessors*2;
-        int blockQueueSize = availProcessors*3;
+        availProcessors=10;
+        int threadPoolSize = availProcessors * 2;
+        int blockQueueSize = availProcessors * 3;
         Properties propss = new Properties();
         propss.put("bootstrap.servers", "192.168.119.128:9092");
         propss.put("group.id", "test");
@@ -57,6 +59,7 @@ public class App {
         propss.put("max.poll.records", threadPoolSize);//每次consumer 拿多少条
         propss.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         propss.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        propss.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");//不同组的consumer 没有提交过offset 从头开始消费
         //propss.put("max.partition.fetch.bytes", "1048576");//从分区获取消息的最大大小 字节 默认 1048576
 
 
@@ -70,10 +73,11 @@ public class App {
             int activeCount = executor.getActiveCount();
             int threadPoolSizes = executor.getPoolSize();
             int queueSize = executor.getQueue().size();
-            System.out.println("excuting task:" + activeCount + "   poolSize:" + threadPoolSizes + "   queueSize:" + queueSize + "  核心线程数:" + executor.getCorePoolSize());
+             logger.info("excuting task:" + activeCount + "   poolSize:" + threadPoolSizes + "   queueSize:" + queueSize + "  核心线程数:" + executor.getCorePoolSize());
 
-            while (blockQueueSize <  queueSize + threadPoolSizes) {
+            while (blockQueueSize < queueSize + threadPoolSizes) {//可以卡的更死一点  activeCount>0
                 queueSize = executor.getQueue().size();//当前队列的内容+线程池的线程 大于 定义的缓存队列数 则等待后面处理完
+
                 //System.out.println("    queueSize + threadPoolSize:" + (queueSize + threadPoolSize));
                 try {
                     Thread.sleep(2000);
@@ -92,8 +96,7 @@ public class App {
                             Date dt = new Date(record.timestamp());
                             DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                             String dateTime = df.format(dt);
-                            System.out.printf("offset = %d, value = %s, dateTime=%s", record.offset(), record.value(), dateTime);
-                            System.out.println();
+                           logger.info("offset = {}, value = {}, dateTime={}", record.offset(), record.value(), dateTime);
 
                             HttpPost httpPost = new HttpPost("http://172.18.23.131:8089");//写到logstash
 

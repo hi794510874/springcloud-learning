@@ -6,8 +6,8 @@ import com.owen.mapper.PkgSalesOrderMasterEntityMapper;
 import com.owen.model.*;
 import com.owen.rabbitmqUtil.RmqHelper;
 import com.owen.redis.helper.JedisHelper;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeoutException;
 @RequestMapping("/order")
 @RestController
 public class SaleOrderMasterController {
-    Logger logger = Logger.getLogger(SaleOrderMasterController.class);
+    Logger logger = LogManager.getLogger(SaleOrderMasterController.class);
 
     @Autowired
     private PkgSalesOrderMasterEntityMapper salesOrderMasterEntityMapper;

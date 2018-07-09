@@ -7,7 +7,7 @@ filebeat.prospectors:
   scan_frequency: 10s
   fields:
     log_topic: debug
-
+    index_name: debug
 
 - input_type: log
   paths:
@@ -17,6 +17,7 @@ filebeat.prospectors:
   scan_frequency: 10s
   fields:
     log_topic: test
+    index_name: test
 
 queue.mem:
   events: 4096

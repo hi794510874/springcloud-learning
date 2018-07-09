@@ -3,8 +3,8 @@ package com.owen.Listener;
 import com.netflix.discovery.shared.Applications;
 import com.netflix.eureka.EurekaServerContextHolder;
 import com.netflix.eureka.registry.PeerAwareInstanceRegistry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.cloud.client.discovery.event.HeartbeatEvent;
 import org.springframework.cloud.client.discovery.event.InstanceRegisteredEvent;
 import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
@@ -23,12 +23,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 public class EurekaInstanListener implements ApplicationListener {
-    private Logger log = LoggerFactory.getLogger(EurekaInstanListener.class);
+    Logger logger = LogManager.getLogger(EurekaInstanListener.class);
 
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
 
-        log.info("监听到的事件:" + applicationEvent.toString());
+        logger.info("监听到的事件:" + applicationEvent.toString());
         // 服务挂掉事件
         if (applicationEvent instanceof EurekaInstanceCanceledEvent) {
             EurekaInstanceCanceledEvent event = (EurekaInstanceCanceledEvent) applicationEvent;
@@ -39,7 +39,7 @@ public class EurekaInstanListener implements ApplicationListener {
             applications.getRegisteredApplications().forEach((registeredApplication) -> {
                 registeredApplication.getInstances().forEach((instance) -> {
                     if (instance.getInstanceId().equals(event.getServerId())) {
-                        log.info("服务：" + instance.getAppName() + " 挂啦。。。");
+                        logger.info("服务：" + instance.getAppName() + " 挂啦。。。");
                         // // TODO: 2017/9/3 扩展消息提醒 邮件、手机短信、微信等
                     }
                 });
@@ -47,18 +47,18 @@ public class EurekaInstanListener implements ApplicationListener {
         }
         if (applicationEvent instanceof InstanceRegisteredEvent) {
             InstanceRegisteredEvent event = (InstanceRegisteredEvent) applicationEvent;
-            EurekaInstanceConfigBean eurekaInstanceConfigBean=(EurekaInstanceConfigBean)event.getConfig();
-            EurekaAutoServiceRegistration eurekaAutoServiceRegistration=(EurekaAutoServiceRegistration)event.getSource();
-            log.info("服务：" + eurekaInstanceConfigBean.getAppname() + " 注册成功啦。。。");
+            EurekaInstanceConfigBean eurekaInstanceConfigBean = (EurekaInstanceConfigBean) event.getConfig();
+            EurekaAutoServiceRegistration eurekaAutoServiceRegistration = (EurekaAutoServiceRegistration) event.getSource();
+            logger.info("服务：" + eurekaInstanceConfigBean.getAppname() + " 注册成功啦。。。");
         }
 
         if (applicationEvent instanceof HeartbeatEvent) {
             HeartbeatEvent event = (HeartbeatEvent) applicationEvent;
-            log.info("心跳检测服务：" + event.getValue());
+            logger.info("心跳检测服务：" + event.getValue());
         }
 
         if (applicationEvent instanceof EurekaRegistryAvailableEvent) {
-            log.info("服务 Aualiable。。");
+            logger.info("服务 Aualiable。。");
         }
     }
 }
