@@ -21,10 +21,56 @@ public class CheckChangeMsg {
         this.id = id;
     }
 
-    private  String content;
-
-    private  int id;
 
 
+    public int getExcutingTask() {
+        return excutingTask;
+    }
 
+    public void setExcutingTask(int excutingTask) {
+        this.excutingTask = excutingTask;
+    }
+
+
+    public String getThreadName() {
+        return threadName;
+    }
+
+    public void setThreadName(String threadName) {
+        this.threadName = threadName;
+    }
+
+    public int getPoolSize() {
+        return poolSize;
+    }
+
+    public void setPoolSize(int poolSize) {
+        this.poolSize = poolSize;
+    }
+
+    public int getQueueSize() {
+        return queueSize;
+    }
+
+    public void setQueueSize(int queueSize) {
+        this.queueSize = queueSize;
+    }
+
+    public int getCoreThreadNum() {
+        return coreThreadNum;
+    }
+
+    public void setCoreThreadNum(int coreThreadNum) {
+        this.coreThreadNum = coreThreadNum;
+    }
+
+    private String threadName;
+    private int poolSize;
+    private int queueSize;
+    private int coreThreadNum;
+    private String content;
+
+    private int id;
+
+    private int excutingTask;
 }

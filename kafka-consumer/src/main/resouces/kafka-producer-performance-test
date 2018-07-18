@@ -1,0 +1,9 @@
+bin/kafka-producer-perf-test.sh --topic test \
+--num-records 1500000  \
+--record-size 1000 \
+--throughput 1500000  \
+--producer-props \
+bootstrap.servers=192.168.119.128:9092 \
+buffer.memory=67108864 \
+compression.type=none \
+batch.size=8196

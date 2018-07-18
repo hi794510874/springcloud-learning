@@ -6,30 +6,32 @@
     <!--先定义所有的appender-->
     <appenders>
         <!--这个输出控制台的配置-->
-        <!--<console name="Console" target="SYSTEM_OUT">-->
-            <!--&lt;!&ndash;输出日志的格式&ndash;&gt;-->
-            <!--<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>-->
-        <!--</console>-->
+        <console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p %t] %l %m%n"/>
+        </console>
 
         <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size 会移到对应的文件夹下-->
-        <RollingFile name="RollingFileInfo" fileName="/logclearup/logs/info.log"
-                     filePattern="/logclearup/logs/info-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileInfo" fileName="/logclearup/logs/info/info.log"
+                     filePattern="/logclearup/logs/info/info-%d{yyyy-MM-dd}-%i.log">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p  %t ] - %l - %m%n"/>
+            <!--<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p  %t ] - %l - %m%n"/>-->
+            <PatternLayout pattern="%m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="1 MB"/>
             </Policies>
             <DefaultRolloverStrategy>
-                <Delete basePath="/logcleanup/logs/" maxDepth="1">
-                    <IfLastModified age="1d" />
+                <Delete basePath="/logcleanup/logs/info" maxDepth="1">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="5s" />
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingFile>
 
-        <RollingFile name="RollingFileWarn" fileName="/logclearup/logs/warn.log"
-                     filePattern="/logclearup/logs/warn-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileWarn" fileName="/logclearup/logs/warn/warn.log"
+                     filePattern="/logclearup/logs/warn/warn-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p  %t ] - %l - %m%n"/>
             <Policies>
@@ -40,8 +42,8 @@
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
-        <RollingFile name="RollingFileError" fileName="/logclearup/logs/error.log"
-                     filePattern="/logclearup/logs/error-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileError" fileName="/logclearup/logs/error/error.log"
+                     filePattern="/logclearup/logs/error/error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p  %t ] - %l - %m%n"/>
             <Policies>
@@ -49,7 +51,8 @@
                 <SizeBasedTriggeringPolicy size="1 MB"/>
             </Policies>
             <DefaultRolloverStrategy>
-                <Delete basePath="/logcleanup/logs/" maxDepth="2">
+                <Delete basePath="/logcleanup/logs/error" maxDepth="2">
+                    <IfFileName glob="*.log" />
                     <IfLastModified age="1d" />
                 </Delete>
             </DefaultRolloverStrategy>
@@ -62,10 +65,10 @@
         <logger name="org.springframework" level="INFO"></logger>
         <logger name="org.mybatis" level="INFO"></logger>
         <root level="all">
-            <!--<appender-ref ref="Console"/>-->
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>
             <appender-ref ref="RollingFileError"/>
+            <appender-ref ref="Console"/>
         </root>
     </loggers>
 </configuration>

@@ -1,20 +1,19 @@
 package com.owen;
 
+import com.alibaba.fastjson.JSON;
 import com.owen.model.CheckChangeMsg;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.kafka.clients.admin.RecordsToDelete;
-import org.apache.kafka.clients.consumer.*;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.TopicPartition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -40,14 +39,19 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * consumer配置参数
  * http://orchome.com/535
- *
+ * <p>
  * consumer.close() 会通知broker 自己退出了   自动触发 rebalance
  */
 public class App {
-    private static Logger logger= LoggerFactory.getLogger(App.class);
+    private static Logger logger = LogManager.getLogger(App.class);
+
     public static void main(String[] args) {
+
+//        App2.test();
+
+
         int availProcessors = Runtime.getRuntime().availableProcessors();//获取可用的cpu数
-        availProcessors=10;
+        availProcessors = 20;
         int threadPoolSize = availProcessors * 2;
         int blockQueueSize = availProcessors * 3;
         Properties propss = new Properties();
@@ -56,11 +60,11 @@ public class App {
         propss.put("enable.auto.commit", "true");//自动提交offset
         propss.put("auto.commit.interval.ms", "1000");//默认5000ms
         propss.put("session.timeout.ms", "30000");
-        propss.put("max.poll.records", threadPoolSize);//每次consumer 拿多少条
+        propss.put("max.poll.records", threadPoolSize);//每次consumer 拿多少条  threadPoolSize
         propss.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         propss.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         propss.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");//不同组的consumer 没有提交过offset 从头开始消费
-        //propss.put("max.partition.fetch.bytes", "1048576");//从分区获取消息的最大大小 字节 默认 1048576
+        //propss.put("max.partition.fetch.bytes", "68684289");//从分区获取消息的最大大小 字节 默认 1048576
 
 
         final KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(propss);
@@ -73,7 +77,13 @@ public class App {
             int activeCount = executor.getActiveCount();
             int threadPoolSizes = executor.getPoolSize();
             int queueSize = executor.getQueue().size();
-             logger.info("excuting task:" + activeCount + "   poolSize:" + threadPoolSizes + "   queueSize:" + queueSize + "  核心线程数:" + executor.getCorePoolSize());
+            CheckChangeMsg checkChangeMsg = new CheckChangeMsg();
+            checkChangeMsg.setCoreThreadNum(executor.getCorePoolSize());
+            checkChangeMsg.setExcutingTask(activeCount);
+            checkChangeMsg.setPoolSize(threadPoolSizes);
+            checkChangeMsg.setQueueSize(queueSize);
+            String logStr = JSON.toJSONString(checkChangeMsg);
+            logger.info(logStr);
 
             while (blockQueueSize < queueSize + threadPoolSizes) {//可以卡的更死一点  activeCount>0
                 queueSize = executor.getQueue().size();//当前队列的内容+线程池的线程 大于 定义的缓存队列数 则等待后面处理完
@@ -96,7 +106,7 @@ public class App {
                             Date dt = new Date(record.timestamp());
                             DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                             String dateTime = df.format(dt);
-                           logger.info("offset = {}, value = {}, dateTime={}", record.offset(), record.value(), dateTime);
+                            //logger.info(record.value());
 
                             HttpPost httpPost = new HttpPost("http://172.18.23.131:8089");//写到logstash
 
@@ -114,11 +124,11 @@ public class App {
                             httpPost.setHeader("Accept", "application/json");
                             httpPost.setHeader("Content-type", "application/json");
 
-                            try {
-                                CloseableHttpResponse response = client.execute(httpPost);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+//                            try {
+//                                CloseableHttpResponse response = client.execute(httpPost);
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
 
 
                             Thread.sleep(3000);
