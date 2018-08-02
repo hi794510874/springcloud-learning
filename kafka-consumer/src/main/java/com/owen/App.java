@@ -62,6 +62,7 @@ public class App {
         propss.put("session.timeout.ms", "30000");
         propss.put("max.poll.records", threadPoolSize);//每次consumer 拿多少条  threadPoolSize
         propss.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        //org.springframework.kafka.support.serializer.JsonDeserializer
         propss.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         propss.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");//不同组的consumer 没有提交过offset 从头开始消费
         //propss.put("max.partition.fetch.bytes", "68684289");//从分区获取消息的最大大小 字节 默认 1048576

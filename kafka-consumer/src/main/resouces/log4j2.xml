@@ -20,12 +20,13 @@
             <PatternLayout pattern="%m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="1 MB"/>
+                <SizeBasedTriggeringPolicy size="1MB"/>
             </Policies>
+
             <DefaultRolloverStrategy>
-                <Delete basePath="/logcleanup/logs/info" maxDepth="1">
+                <Delete basePath="/logcleanup/logs/info" maxDepth="2">
                     <IfFileName glob="*.log" />
-                    <IfLastModified age="5s" />
+                    <IfLastModified age="1d" />
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingFile>
@@ -36,7 +37,7 @@
             <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p  %t ] - %l - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="1 MB"/>
+                <SizeBasedTriggeringPolicy size="1MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
             <DefaultRolloverStrategy max="10"/>
@@ -48,10 +49,10 @@
             <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p  %t ] - %l - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="1 MB"/>
+                <SizeBasedTriggeringPolicy size="1MB"/>
             </Policies>
             <DefaultRolloverStrategy>
-                <Delete basePath="/logcleanup/logs/error" maxDepth="2">
+                <Delete basePath="/logcleanup/logs/error" maxDepth="1">
                     <IfFileName glob="*.log" />
                     <IfLastModified age="1d" />
                 </Delete>

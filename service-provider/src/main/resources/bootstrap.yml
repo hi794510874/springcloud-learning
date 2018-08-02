@@ -17,7 +17,7 @@ spring:
         driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     #    url: jdbc:sqlserver://172.18.21.31;DatabaseName=Test
         username: sa
-        password: ctripwingonuat
+        password: ctrip.hp580dbsz.test
 #    zipkin:
 #      base-url: http://localhost:8790
 

@@ -9,12 +9,12 @@ filter.threshold.type=ThresholdFilter
 filter.threshold.level=debug
 #appenders = console, I, E
 #不要输出到console，要养成看日志文件的习惯
-appenders=I, E
-#appender.console.type = Console
-#appender.console.name = STDOUT
-#appender.console.target = SYSTEM_OUT
-#appender.console.layout.type = PatternLayout
-#appender.console.layout.pattern = %-d{yyyy-MM-dd HH:mm:ss} [ %p ] [ %c ] %m%n
+appenders=I, E, console
+appender.console.type = Console
+appender.console.name = STDOUT
+appender.console.target = SYSTEM_OUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = %-d{yyyy-MM-dd HH:mm:ss} [ %p ] [ %c ] %m%n
 appender.I.type=RollingFile
 appender.I.name=InfoRollingFile
 appender.I.fileName=/logclearup/logs/info.log
@@ -63,9 +63,9 @@ appender.E.strategy.delete.iffilename.iflastmodified.age = 1d
 
 
 rootLogger.level=info
-#rootLogger.appenderRefs = stdout,I,E
-rootLogger.appenderRefs=I,E
-#rootLogger.appenderRef.stdout.ref = STDOUT
+rootLogger.appenderRefs = stdout,I,E
+#rootLogger.appenderRefs=I,E
+rootLogger.appenderRef.stdout.ref = STDOUT
 rootLogger.appenderRef.I.ref=InfoRollingFile
 rootLogger.appenderRef.I.level=info
 rootLogger.appenderRef.E.ref=ErrorRollingFile

@@ -6,10 +6,11 @@
     <!--先定义所有的appender-->
     <appenders>
         <!--这个输出控制台的配置-->
-        <!--<console name="Console" target="SYSTEM_OUT">-->
-            <!--&lt;!&ndash;输出日志的格式&ndash;&gt;-->
-            <!--<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>-->
-        <!--</console>-->
+        <console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" />
+        </console>
 
         <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size 会移到对应的文件夹下-->
         <RollingFile name="RollingFileInfo" fileName="/logclearup/logs/info.log"
@@ -62,7 +63,7 @@
         <logger name="org.springframework" level="INFO"></logger>
         <logger name="org.mybatis" level="INFO"></logger>
         <root level="all">
-            <!--<appender-ref ref="Console"/>-->
+            <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>
             <appender-ref ref="RollingFileError"/>

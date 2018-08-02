@@ -14,9 +14,11 @@ import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Console;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -45,8 +47,8 @@ public class SaleOrderMasterController {
     private JedisHelper jedisHelper;
 
     /*
-    * 调用自动生成代码
-    * */
+     * 调用自动生成代码
+     * */
     @RequestMapping(value = "/getsalesordermasterbyorderno/{salesOrderNo}", method = RequestMethod.GET)
     public CommonRS<PkgSalesOrderMasterEntity> getSaleOrderMasterByOrderNo(@PathVariable int salesOrderNo) {
         PkgSalesOrderMasterEntity result = salesOrderMasterEntityMapper.selectByPrimaryKey(salesOrderNo);
@@ -61,10 +63,10 @@ public class SaleOrderMasterController {
     }
 
     /*
-    * 手动 mapping
-    * */
+     * 手动 mapping
+     * */
     @RequestMapping(value = "/getsaleordermasterandpkgordermaster/{pkgorderno}", method = RequestMethod.GET)
-    public CommonRS<List<PkgOrderMasterANDSalesOrderMasterEntity>> getSaleOrderMasterByOrderNo(@PathVariable String pkgorderno) {
+    public CommonRS<List<PkgOrderMasterANDSalesOrderMasterEntity>> getSaleOrderMasterByOrderNo(@PathVariable String pkgorderno, HttpServletRequest request) {
         List<PkgOrderMasterANDSalesOrderMasterEntity> result = pkgOrderMasterANDSalesOrderMasterEntityMapper.selectByPkgOrderNo(pkgorderno);
 
         CommonRS<List<PkgOrderMasterANDSalesOrderMasterEntity>> commonRS = new CommonRS<>();
@@ -78,6 +80,7 @@ public class SaleOrderMasterController {
         this.tracer.addTag("response", JacksonUtils.toJson(commonRS));
         //long traceId = tracer.getCurrentSpan().getTraceId();
         String traceId = tracer.getCurrentSpan().traceIdString();
+        request.setAttribute("traceId", traceId);
         logger.debug("traceid" + traceId);
         return commonRS;
     }
@@ -112,5 +115,4 @@ public class SaleOrderMasterController {
 
         return commonRS;
     }
-
 }
