@@ -146,7 +146,7 @@
         <dependency>
             <groupId>com.ctrip.framework.apollo</groupId>
             <artifactId>apollo-client</artifactId>
-            <version>0.11.0-SNAPSHOT</version>
+            <version>0.11.0-RELEASES</version>
         </dependency>
 
         <dependency>
@@ -176,6 +176,8 @@
                 <executions>
                     <execution>
                         <id>Generate MyBatis Artifacts</id>
+                        <!--修改自动生成代码的 时机-->
+                        <phase>deploy</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -200,13 +202,14 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <classifier>exec</classifier>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<classifier>exec</classifier>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
         </plugins>
     </build>
 
