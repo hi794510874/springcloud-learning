@@ -32,7 +32,6 @@ public class ConfigTestController {
 
     @RequestMapping(value = "/getjdbcenv", method = RequestMethod.GET)
     public String getJdbcEnv() {
-
         return jdbcConfig.getEnv();
     }
     @RequestMapping(value = "/getrmqnv", method = RequestMethod.GET)
