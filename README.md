@@ -232,15 +232,19 @@
   mkdir /var/cache/tengine/scgi_temp -p
 
   
-* [filebeat Systemd](#filebeat Systemd)
+* [filebeat通过Systemd守护](#filebeat通过Systemd守护)
 
   * filebeat Systemd
 
    vi /usr/lib/systemd/system/filebeat4testdebug.service	然后添加以下内容:
+
   [Unit]
   Description=Filebeat sends log files to Logstash or directly to Elasticsearch.
+
   Documentation=https://www.elastic.co/products/beats/filebeat
+
   Wants=network-online.target
+
   After=network-online.target
 
   [Service]
