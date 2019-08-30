@@ -43,9 +43,7 @@
     * zipkin会生成一个全局的traceid 写debug、errorlog的时候建议都带上traceid 到时好关联查找问题，用filebeat收集日志到es
     
 * [filebeat-logstash](#filebeat-logstash)
-    * filebeat & logstash 的实例配置我都有放一个在 service-provider resource文件夹下,可直接参考
-    
-    
+    * filebeat & logstash 的实例配置我都有放一个在 service-provider resource文件夹下,可直接参考    
     
     
     
@@ -97,10 +95,14 @@
 	
 	> systemctl enable supervisord.service
 	
-	> systemctl Start supervisord.service
+	> systemctl start supervisord.service
+	
+	> systemctl status supervisord.service
+	
+	systemd 守护supervisord 配置完成
 
     
-* [supervisor 守护java进程](#supervisor 守护java进程)
+* [supervisor守护java进程](#supervisor守护java进程)
 
   * supervisor 守护java进程 配置
 
@@ -108,7 +110,7 @@
   
   [include]
 
-  files = /etc/conf.d/*.conf 
+  files = /etc/supervisor/conf.d/*.conf 
   
   然后直接在/etc/supervisor/conf.d目录下 添加一个 pacakgeoptionbusinessapa.conf文件 里面添加如下配置:
     
@@ -127,9 +129,6 @@
   user=root
 
   stopsignal=INT
-
-
-
   
   或者
 
@@ -156,3 +155,78 @@
   supervisorctl update 更新配置   supervisorctl reload 重启配置中所有进程  supervisorctl 查看正在守护的进程  supervisorctl restart program_name 重启某个进程
 
   
+* [tengine安装配置](#tengine安装配置)
+
+  * 安装
+  
+  http://tengine.taobao.org/download.html 找一个最新的下载
+
+  目录换到解压后的源码目录，开始检测环境
+
+  #./configure --prefix=/usr/local/tengine \
+
+  --prefix=/etc/tengine \
+
+  --sbin-path=/usr/sbin/tengine \
+
+  --conf-path=/etc/tengine/tengine.conf \
+
+  --error-log-path=/var/log/tengine/error.log \
+
+  --http-log-path=/var/log/tengine/access.log \
+
+  --pid-path=/var/run/tengine.pid \
+
+  --lock-path=/var/run/tengine.lock \
+
+  --http-client-body-temp-path=/var/cache/tengine/client_temp \
+
+  --http-proxy-temp-path=/var/cache/tengine/proxy_temp \
+
+  --http-fastcgi-temp-path=/var/cache/tengine/fastcgi_temp \
+
+  --http-uwsgi-temp-path=/var/cache/tengine/uwsgi_temp \
+
+  --http-scgi-temp-path=/var/cache/tengine/scgi_temp \
+
+  --user=tengine \
+
+  --group=tengine \
+
+  --with-http_gzip_static_module \
+
+  --with-http_realip_module \
+
+  --with-http_stub_status_module \
+
+  --with-http_concat_module \
+
+  --with-http_auth_request_module \
+
+  --add-module=/usr/local/src/nginx_more_heads/headers-more-nginx-module-0.33 \
+
+  --with-debug
+ 
+  这里是老的版本 有些模块会报错 去掉就行了
+
+  安装
+  # make && make install
+ 
+ 
+  添加用户组和用户
+
+  groupadd tengine
+
+  useradd tengine -g tengine
+ 
+  创建一些编译指定的目录
+
+  mkdir /var/cache/tengine/client_temp -p
+
+  mkdir /var/cache/tengine/proxy_temp -p
+
+  mkdir /var/cache/tengine/fastcgi_temp -p
+
+  mkdir /var/cache/tengine/uwsgi_temp -p
+
+  mkdir /var/cache/tengine/scgi_temp -p
