@@ -210,7 +210,7 @@
   这里是老的版本 有些模块会报错 去掉就行了
 
   安装
-  # make && make install
+   make && make install
  
  
   添加用户组和用户
@@ -230,3 +230,31 @@
   mkdir /var/cache/tengine/uwsgi_temp -p
 
   mkdir /var/cache/tengine/scgi_temp -p
+
+  
+* [filebeat Systemd](#filebeat Systemd)
+
+  * filebeat Systemd
+
+   vi /usr/lib/systemd/system/filebeat4testdebug.service	然后添加以下内容:
+  [Unit]
+  Description=Filebeat sends log files to Logstash or directly to Elasticsearch.
+  Documentation=https://www.elastic.co/products/beats/filebeat
+  Wants=network-online.target
+  After=network-online.target
+
+  [Service]
+  ExecStart=/usr/app/filebeat/test/debug/filebeat -c /usr/app/filebeat/test/debug/filebeat.yml -path.home /usr/app/filebeat/test/debug -path.config /usr/app/filebeat/test/debug -path.data /usr/app/filebeat/test/debug/data -path.logs /usr/app/filebeat/test/debug/logs
+ 
+  Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+
+   systemctl daemon-reload
+
+   systemctl enable filebeat4testdebug.service
+
+   systemctl start filebeat4testdebug.service
+
+   systemctl status filebeat4testdebug.service
