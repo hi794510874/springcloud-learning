@@ -51,19 +51,29 @@
     
     
 * [守护进程 supervisor 安装](#守护进程 supervisor 安装)
-  *systemd 来守护supervisord
+  * systemd 来守护supervisord
   我用的是pip 安装：
+  
 	> pip install supervisor
+	
 	如果没有pip,需要先安装PIP
+	
 	> yum -y install epel-release
+	
 	> yum -y install python-pip
+	
 	产生 supervisor 的配置文件
+	
 	> echo_supervisord_conf > /etc/supervisord.conf
+	
 	默认的日志在 /tmp/supervisord.log
 
 	supervisor 默认不是系统服务，不会随着系统重启而启动，下载是把它做成系统服务:
+	
 	> vi /usr/lib/systemd/system/supervisord.service
+	
 	添加以下内容：
+	
 		# supervisord service for systemd (CentOS 7.0+)
 		# by ET-CS (https://github.com/ET-CS)
 		[Unit]
@@ -81,7 +91,11 @@
 		[Install]
 		WantedBy=multi-user.target
 
-	保存退出
+	保存退出:
+	
 	> systemctl daemon-reload
+	
 	> systemctl enable supervisord.service
+	
+	> systemctl Start supervisord.service
 
