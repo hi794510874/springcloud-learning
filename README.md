@@ -239,6 +239,7 @@
    vi /usr/lib/systemd/system/filebeat4testdebug.service	然后添加以下内容:
 
   [Unit]
+
   Description=Filebeat sends log files to Logstash or directly to Elasticsearch.
 
   Documentation=https://www.elastic.co/products/beats/filebeat
@@ -248,11 +249,13 @@
   After=network-online.target
 
   [Service]
+
   ExecStart=/usr/app/filebeat/test/debug/filebeat -c /usr/app/filebeat/test/debug/filebeat.yml -path.home /usr/app/filebeat/test/debug -path.config /usr/app/filebeat/test/debug -path.data /usr/app/filebeat/test/debug/data -path.logs /usr/app/filebeat/test/debug/logs
  
   Restart=always
 
    [Install]
+
    WantedBy=multi-user.target
 
    systemctl daemon-reload
