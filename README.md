@@ -64,7 +64,7 @@
 	
 	产生 supervisor 的配置文件
 	
-	> echo_supervisord_conf > /etc/supervisord.conf
+	> echo_supervisord_conf > /etc/supervisor/supervisord.conf
 	
 	默认的日志在 /tmp/supervisord.log
 
@@ -99,3 +99,60 @@
 	
 	> systemctl Start supervisord.service
 
+    
+* [supervisor 守护java进程](#supervisor 守护java进程)
+
+  * supervisor 守护java进程 配置
+
+  在/etc/supervisor/supervisord.conf文件中添加 
+  
+  [include]
+
+  files = /etc/conf.d/*.conf 
+  
+  然后直接在/etc/supervisor/conf.d目录下 添加一个 pacakgeoptionbusinessapa.conf文件 里面添加如下配置:
+    
+  [program:package-option-business-api] 
+
+  command=/usr/java/jdk-11.0.3+7/bin/java -jar package-option-business-api-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+
+  directory=/usr/local/soft/pbs/package-option-business-api
+
+  autorestart=true
+
+  stderr_logfile=/var/log/supervisor/package-option-business-api.err.log
+
+  stdout_logfile=/var/log/supervisor/package-option-business-api.out.log
+
+  user=root
+
+  stopsignal=INT
+
+
+
+  
+  或者
+
+  直接在/etc/supervisor/supervisord.conf中添加如下配置:
+  
+  [program:package-option-business-api] 
+
+  command=/usr/java/jdk-11.0.3+7/bin/java -jar package-option-business-api-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+
+  directory=/usr/local/soft/pbs/package-option-business-api
+
+  autorestart=true
+
+  stderr_logfile=/var/log/supervisor/package-option-business-api.err.log
+
+  stdout_logfile=/var/log/supervisor/package-option-business-api.out.log
+
+  user=root
+
+  stopsignal=INT
+
+  配置添加成功后 
+
+  supervisorctl update 更新配置   supervisorctl reload 重启配置中所有进程  supervisorctl 查看正在守护的进程  supervisorctl restart program_name 重启某个进程
+
+  
