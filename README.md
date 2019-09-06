@@ -65,6 +65,8 @@
 	> echo_supervisord_conf > /etc/supervisor/supervisord.conf
 	
 	默认的日志在 /tmp/supervisord.log
+	
+	supervisord.conf 里面这个file=/tmp/supervisor.sock  这个配置位置要改
 
 	supervisor 默认不是系统服务，不会随着系统重启而启动，下载是把它做成系统服务:
 	
