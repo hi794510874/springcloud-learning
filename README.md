@@ -267,3 +267,14 @@
    systemctl start filebeat4testdebug.service
 
    systemctl status filebeat4testdebug.service
+   
+   [IDEA插件](#IDEA插件)
+   
+   ● IDEA plugins
+   ● Free MyBatis plugin
+   ● Grep Console
+   ● Lombok
+   ● GsonFormat
+   ● MyBatis log Plugin
+   ● Markdown Navigator
+
